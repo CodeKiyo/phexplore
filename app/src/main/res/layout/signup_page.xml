@@ -67,7 +67,7 @@
                     android:layout_width="272dp"
                     android:layout_height="47dp"
                     android:background="@drawable/signup_credential"
-                    android:backgroundTint="#EFEFEF"
+                    android:backgroundTint="#FAFAFA"
                     android:foregroundGravity="center"
                     app:cardCornerRadius="32dp"
                     app:cardElevation="3dp"
@@ -78,7 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/signup_credential"
-                        android:backgroundTint="#EFEFEF"
+                        android:backgroundTint="#F4F4F4"
                         android:gravity="end"
                         android:orientation="horizontal">
 
@@ -136,7 +136,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/signup_credential"
-                        android:backgroundTint="#EFEFEF"
+                        android:backgroundTint="#F4F4F4"
                         android:gravity="end"
                         android:orientation="horizontal">
 
@@ -183,7 +183,7 @@
                     android:layout_width="272dp"
                     android:layout_height="47dp"
                     android:background="@drawable/signup_credential"
-                    android:backgroundTint="#EFEFEF"
+                    android:backgroundTint="#F4F4F4"
                     android:foregroundGravity="center"
                     app:cardCornerRadius="32dp"
                     app:cardElevation="3dp"
@@ -242,7 +242,7 @@
                     android:layout_width="272dp"
                     android:layout_height="47dp"
                     android:background="@drawable/signup_credential"
-                    android:backgroundTint="#EFEFEF"
+                    android:backgroundTint="#F4F4F4"
                     android:foregroundGravity="center"
                     app:cardCornerRadius="32dp"
                     app:cardElevation="3dp"

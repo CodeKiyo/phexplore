@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PHExplore</string>
+    <string name="quote1">Everyone has the right to freedom of thought, conscience, and explore</string>
+    <string name="quote2">Exploration is the compass guiding us through the vast landscapes of possibility</string>
+    <string name="quote3">Tourism unlocks the doors of perception, one journey at a time</string>
+    <string name="phexplore">PHExplore</string>
+    <string name="get_started">Tap Here to Get Started</string>
+    <string name="slogan">Explore Philippines Explore Now</string>
 </resources>

@@ -45,16 +45,16 @@
 
                 <ImageView
                     android:id="@+id/signup_icon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
                     app:srcCompat="@drawable/signup_user_icon"
-                    tools:layout_editor_absoluteX="309dp"
+                    tools:layout_editor_absoluteX="306dp"
                     tools:layout_editor_absoluteY="16dp" />
 
                 <TextView
                     android:id="@+id/signupText"
                     android:layout_width="115dp"
-                    android:layout_height="30dp"
+                    android:layout_height="33dp"
                     android:fontFamily="@font/saxony_serial_bold"
                     android:text="Sign Up"
                     android:textColor="#000000"

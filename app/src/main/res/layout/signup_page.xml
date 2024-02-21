@@ -26,11 +26,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/signup_card"
             android:layout_width="355dp"
-            android:layout_height="590dp"
+            android:layout_height="650dp"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="58dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="28dp"
-            android:layout_marginBottom="83dp"
+            android:layout_marginBottom="41dp"
             android:background="@drawable/signup_signupcontainer"
             android:backgroundTint="#FFFFFF"
             app:cardCornerRadius="16dp"
@@ -45,209 +45,48 @@
 
                 <ImageView
                     android:id="@+id/signup_icon"
-                    android:layout_width="37dp"
-                    android:layout_height="37dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     app:srcCompat="@drawable/signup_user_icon"
-                    tools:layout_editor_absoluteX="290dp"
-                    tools:layout_editor_absoluteY="25dp" />
+                    tools:layout_editor_absoluteX="309dp"
+                    tools:layout_editor_absoluteY="16dp" />
 
                 <TextView
                     android:id="@+id/signupText"
-                    android:layout_width="122dp"
-                    android:layout_height="38dp"
-                    android:layout_marginStart="27dp"
-                    android:layout_marginTop="26dp"
-                    android:layout_marginEnd="141dp"
-                    android:layout_marginBottom="41dp"
+                    android:layout_width="115dp"
+                    android:layout_height="30dp"
                     android:fontFamily="@font/saxony_serial_bold"
                     android:text="Sign Up"
                     android:textColor="#000000"
-                    android:textSize="30sp"
-                    app:layout_constraintBottom_toTopOf="@+id/signup_username_card"
-                    app:layout_constraintEnd_toStartOf="@+id/signup_icon"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/signup_username_card"
-                    android:layout_width="272dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/signup_credential"
-                    android:backgroundTint="#F4F4F4"
-                    android:foregroundGravity="center"
-                    app:cardCornerRadius="32dp"
-                    app:cardElevation="0dp"
-                    tools:layout_editor_absoluteX="41dp"
-                    tools:layout_editor_absoluteY="104dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/signup_credential"
-                        android:backgroundTint="#F4F4F4"
-                        android:gravity="end"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:id="@+id/signup_username_icon"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="22dp"
-                            android:layout_marginBottom="14dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/signup_username"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/signup_username_icon" />
-
-                        <EditText
-                            android:id="@+id/signup_username"
-                            android:layout_width="184dp"
-                            android:layout_height="47dp"
-                            android:background="@null"
-                            android:ems="10"
-                            android:fontFamily="@font/jetbrainsmono_medium"
-                            android:hint="Username"
-                            android:inputType="text"
-                            android:maxLength="12"
-                            android:nestedScrollingEnabled="true"
-                            android:singleLine="false"
-                            android:textAlignment="viewStart"
-                            android:textSize="14sp"
-                            tools:layout_editor_absoluteX="58dp"
-                            tools:layout_editor_absoluteY="12dp" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/signup_email_card"
-                    android:layout_width="272dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/signup_credential"
-                    android:backgroundTint="#F4F4F4"
-                    android:foregroundGravity="center"
-                    app:cardCornerRadius="32dp"
-                    app:cardElevation="0dp"
-                    tools:layout_editor_absoluteX="41dp"
-                    tools:layout_editor_absoluteY="172dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/signup_credential"
-                        android:backgroundTint="#F4F4F4"
-                        android:gravity="end"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:id="@+id/signup_email_icon"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="22dp"
-                            android:layout_marginBottom="14dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/signup_username"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/signup_email_icon" />
-
-                        <EditText
-                            android:id="@+id/signup_email"
-                            android:layout_width="184dp"
-                            android:layout_height="47dp"
-                            android:background="@null"
-                            android:ems="10"
-                            android:fontFamily="@font/jetbrainsmono_medium"
-                            android:hint="Email"
-                            android:inputType="text"
-                            android:maxLength="12"
-                            android:nestedScrollingEnabled="true"
-                            android:singleLine="false"
-                            android:textAlignment="viewStart"
-                            android:textSize="14sp"
-                            tools:layout_editor_absoluteX="58dp" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/signup_birthday_card"
-                    android:layout_width="272dp"
-                    android:layout_height="60dp"
-                    android:background="@drawable/signup_credential"
-                    android:backgroundTint="#F4F4F4"
-                    android:clickable="true"
-                    android:foregroundGravity="center"
-                    app:cardCornerRadius="32dp"
-                    app:cardElevation="0dp"
-                    tools:layout_editor_absoluteX="41dp"
-                    tools:layout_editor_absoluteY="241dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/signup_credential"
-                        android:backgroundTint="#EFEFEF"
-                        android:gravity="end"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:id="@+id/signup_birthday_icon"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="13dp"
-                            android:layout_marginEnd="22dp"
-                            android:layout_marginBottom="14dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/signup_username"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/signup_birthday_icon" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/signup_birthday"
-                            android:layout_width="184dp"
-                            android:layout_height="47dp"
-                            android:background="?attr/selectableItemBackground"
-                            android:clickable="true"
-                            android:ems="10"
-                            android:fontFamily="@font/jetbrainsmono_medium"
-                            android:gravity="center"
-                            android:hint="Birthdate"
-                            android:inputType="text"
-                            android:maxLength="12"
-                            android:nestedScrollingEnabled="true"
-                            android:singleLine="false"
-                            android:textAlignment="viewStart"
-                            android:textSize="14sp"
-                            tools:layout_editor_absoluteX="58dp" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.cardview.widget.CardView>
+                    android:textSize="25sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="16dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/signup_password_layout"
                     android:layout_width="272dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="10dp"
+                    android:layout_height="wrap_content"
                     android:hint="Enter your password..."
+                    android:textColorHint="#BABABA"
+                    android:visibility="gone"
+                    app:boxBackgroundColor="@color/white"
                     app:boxBackgroundMode="outline"
-                    app:boxCornerRadius=""
+                    app:counterEnabled="true"
+                    app:counterMaxLength="12"
+                    app:helperText="Enter Password"
+                    app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/signup_password_icon"
-                    app:startIconDrawableSize="20dp"
                     tools:layout_editor_absoluteX="41dp"
-                    tools:layout_editor_absoluteY="317dp" />
+                    tools:layout_editor_absoluteY="363dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textPassword"
+                        android:textSize="11sp"
+                        app:fontFamily="@font/jetbrainsmono_medium" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

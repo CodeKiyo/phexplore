@@ -80,6 +80,7 @@
                     tools:layout_editor_absoluteY="363dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/signup_password_input"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="textPassword"

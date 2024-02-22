@@ -3,7 +3,12 @@ package com.mobdeve.phexplore
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.mobdeve.phexplore.databinding.SignupPageBinding
 
 class SignUpActivity : AppCompatActivity() {

@@ -29,7 +29,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@drawable/taft" />
+                tools:srcCompat="@drawable/mainmenu_destimage_img" />
 
             <TextView
                 android:id="@+id/destName"

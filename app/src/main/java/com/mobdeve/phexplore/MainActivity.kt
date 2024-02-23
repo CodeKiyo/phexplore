@@ -6,13 +6,8 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
-import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.SnapHelper
 import com.mobdeve.phexplore.databinding.IntroPageBinding
 import kotlin.random.Random
-import com.mobdeve.phexplore.databinding.MainmenuPageBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,23 +19,10 @@ class MainActivity : AppCompatActivity() {
     )
 
     private lateinit var introPage : IntroPageBinding
-    private lateinit var mainPage : MainmenuPageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // This is to test the main menu page without the need for login
-
-        mainPage = MainmenuPageBinding.inflate(layoutInflater)
-        setContentView(mainPage.root)
-        mainPage.menuRecyclerView.adapter = MainViewAdapter(DataGenerator.loadData())
-        val linearLayoutManager = LinearLayoutManager(this)
-        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        mainPage.menuRecyclerView.layoutManager = linearLayoutManager
-
-
-
-        /*
         // ViewBinding
         introPage = IntroPageBinding.inflate(layoutInflater)
 
@@ -77,6 +59,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-         */
+
     }
 }

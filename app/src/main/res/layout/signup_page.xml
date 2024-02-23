@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#33000000">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/backgroundSignup"
@@ -18,6 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#33000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,29 +47,20 @@
                     android:id="@+id/signup_text"
                     android:layout_width="115dp"
                     android:layout_height="33dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="175dp"
                     android:fontFamily="@font/saxony_serial_bold"
                     android:text="Sign Up"
                     android:textColor="#000000"
                     android:textSize="25sp"
-                    app:layout_constraintEnd_toStartOf="@+id/signup_icon"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="16dp" />
 
                 <ImageView
                     android:id="@+id/signup_icon"
                     android:layout_width="33dp"
                     android:layout_height="33dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="35dp"
-                    app:layout_constraintBottom_toTopOf="@+id/signup_username_layout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/signup_text"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/signup_user_icon" />
+                    app:srcCompat="@drawable/signup_user_icon"
+                    tools:layout_editor_absoluteX="306dp"
+                    tools:layout_editor_absoluteY="17dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/signup_username_layout"
@@ -79,6 +70,7 @@
                     android:textColorHint="#BABABA"
                     app:boxBackgroundColor="@color/white"
                     app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#949494"
                     app:counterEnabled="true"
                     app:counterMaxLength="20"
                     app:endIconMode="clear_text"
@@ -107,6 +99,7 @@
                     android:textColorHint="#BABABA"
                     app:boxBackgroundColor="@color/white"
                     app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#949494"
                     app:counterEnabled="false"
                     app:endIconMode="custom"
                     app:helperText="Required*"
@@ -122,6 +115,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:textSize="12sp"
+
                         app:fontFamily="@font/jetbrainsmono_medium" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -134,6 +128,7 @@
                     android:textColorHint="#BABABA"
                     app:boxBackgroundColor="@color/white"
                     app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#949494"
                     app:counterEnabled="true"
                     app:counterMaxLength="12"
                     app:endIconMode="password_toggle"
@@ -154,34 +149,74 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/birthdate_text"
+                    style="@style/TextAppearance.Material3.BodySmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Birthday"
+                    android:textSize="12sp"
+                    tools:layout_editor_absoluteX="41dp"
+                    tools:layout_editor_absoluteY="359dp" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/signup_birthday_layout"
-                    android:layout_width="126dp"
-                    android:layout_height="62dp"
-                    android:hint="Email"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:hint="Date of Birth"
                     android:textColorHint="#BABABA"
                     app:boxBackgroundColor="@color/white"
                     app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#949494"
                     app:counterEnabled="false"
-                    app:endIconMode="custom"
+                    app:endIconMode="none"
                     app:helperText="Required*"
                     app:helperTextTextColor="#FF0000"
                     app:startIconCheckable="false"
-                    app:startIconDrawable="@drawable/signup_email_icon"
-                    tools:layout_editor_absoluteX="187dp"
-                    tools:layout_editor_absoluteY="359dp">
+                    tools:layout_editor_absoluteX="41dp"
+                    tools:layout_editor_absoluteY="375dp">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/signup_birthday_input"
+                        android:id="@+id/signup_birthday_display"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
                         android:clickable="true"
                         android:enabled="false"
+                        android:gravity="center"
+                        android:inputType="none"
+                        android:textColor="#1D1B20"
                         android:textSize="12sp"
                         app:fontFamily="@font/jetbrainsmono_medium" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/signup_birthday_button_input"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="50dp"
+                    android:layout_height="64dp"
+                    android:fontFamily="@font/jetbrainsmono_medium"
+                    android:textSize="12sp"
+                    app:icon="@drawable/signup_birthday_icon"
+                    app:iconGravity="start"
+                    app:iconTint="#49454F"
+                    app:strokeColor="#949494"
+                    tools:layout_editor_absoluteX="212dp"
+                    tools:layout_editor_absoluteY="375dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/signup_createaccount"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#00C8C6"
+                    android:fontFamily="@font/saxony_serial_bold"
+                    android:text="Create Account"
+                    android:textColor="#FFFFFF"
+                    app:cornerRadius="4dp"
+                    tools:layout_editor_absoluteX="92dp"
+                    tools:layout_editor_absoluteY="476dp" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

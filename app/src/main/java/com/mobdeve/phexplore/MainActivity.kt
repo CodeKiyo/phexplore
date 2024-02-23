@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        /*
         // This is to test the main menu page without the need for login
         mainPage = MainmenuPageBinding.inflate(layoutInflater)
         setContentView(mainPage.root)
@@ -36,8 +37,8 @@ class MainActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         mainPage.menuRecyclerView.layoutManager = linearLayoutManager
+         */
 
-        /*
         // ViewBinding
         introPage = IntroPageBinding.inflate(layoutInflater)
 
@@ -73,7 +74,5 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
-
-         */
     }
 }

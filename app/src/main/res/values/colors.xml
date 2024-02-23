@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="underline">#D8D6D6</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Gradient Alpha (Wala, label ko lang) Set of Colors -->
+    <color name="AlphaStart">#00F38D</color>
+    <color name="AlphaCenter">#00C8C6</color>
+    <color name="AlphaEnd">#009FFF</color>
 </resources>

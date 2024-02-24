@@ -16,6 +16,15 @@ class MainViewAdapter(private val data: ArrayList<DestinationModel>) : RecyclerV
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bindData(this.data[position])
+        holder.setLikeSwitchClickListener {
+            if(this.data[position].isLiked) {
+                this.data[position].isLiked = false
+                holder.setLikeButtonImageResource(R.drawable.heart_svgrepo_com)
+            } else {
+                this.data[position].isLiked = true
+                holder.setLikeButtonImageResource(R.drawable.heart_red)
+            }
+        }
     }
 
     override fun getItemCount(): Int {

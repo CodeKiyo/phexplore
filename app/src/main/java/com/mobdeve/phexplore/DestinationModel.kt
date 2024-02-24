@@ -5,7 +5,7 @@ class DestinationModel(destName: String, destImage: Int) {
         private set
     var destImage = destImage
         private set
-
+    var isLiked = false
     override fun toString(): String {
         return "DestinationModel{" +
                 "destName='" + destName + '\'' +

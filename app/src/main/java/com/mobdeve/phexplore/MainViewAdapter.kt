@@ -24,29 +24,26 @@ class MainViewAdapter(private val data: ArrayList<DestinationModel>, private val
         return MainViewHolder(viewBinding)
     }
 
+
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         holder.bindData(this.data[position])
-<<<<<<< Updated upstream
         holder.setLikeSwitchClickListener {
-            if(this.data[position].isLiked) {
+            if (this.data[position].isLiked) {
                 this.data[position].isLiked = false
                 holder.setLikeButtonImageResource(R.drawable.heart_svgrepo_com)
             } else {
                 this.data[position].isLiked = true
                 holder.setLikeButtonImageResource(R.drawable.heart_red)
             }
-=======
-
+        }
         holder.itemView.setOnClickListener {
             var intentToViewItem = Intent(holder.itemView.context, MenuItemViewActivity::class.java)
             intentToViewItem.putExtra(dest_name, this.data[(position)].destName)
             intentToViewItem.putExtra(dest_description, this.data[(position)].destDescription)
             intentToViewItem.putExtra(dest_image.toString(), this.data[(position)].destImage)
             test.launch(intentToViewItem)
->>>>>>> Stashed changes
         }
     }
-
     override fun getItemCount(): Int {
         return this.data.size
     }

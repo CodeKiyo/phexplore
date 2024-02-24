@@ -5,13 +5,9 @@ class DestinationModel(destName: String, destDescription: String, destImage: Int
         private set
     var destImage = destImage
         private set
-<<<<<<< Updated upstream
     var isLiked = false
-=======
     var destDescription = destDescription
         private set
-
->>>>>>> Stashed changes
     override fun toString(): String {
         return "DestinationModel{" +
                 "destName='" + destName + '\'' +

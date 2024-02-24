@@ -9,6 +9,10 @@ import com.mobdeve.phexplore.databinding.MainmenuPageBinding
 
 class MainViewActivity : AppCompatActivity()  {
 
+    companion object{
+        const val signup_username_input : String = "SIGNUP_USERNAME_INPUT"
+    }
+
     private lateinit var mainmenuPage: MainmenuPageBinding
     private lateinit var likedLocations:ArrayList<String>
     private lateinit var likedImages:ArrayList<Int>
@@ -19,8 +23,17 @@ class MainViewActivity : AppCompatActivity()  {
         mainmenuPage = MainmenuPageBinding.inflate(layoutInflater)
 
         setContentView(mainmenuPage.root)
+<<<<<<< HEAD
         val data = DataGenerator.loadData()
         mainmenuPage.menuRecyclerView.adapter = MainViewAdapter(data)
+=======
+
+        // Replaces the username with what the user inputs from the Sign Up Page
+        this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
+
+
+        mainmenuPage.menuRecyclerView.adapter = MainViewAdapter(DataGenerator.loadData())
+>>>>>>> 097de54d26165d2e4a4de5e448b705b1683a990b
 
         val linearLayoutManager = LinearLayoutManager(this)
 

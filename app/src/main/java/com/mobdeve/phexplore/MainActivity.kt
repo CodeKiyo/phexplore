@@ -25,11 +25,11 @@ class MainActivity : AppCompatActivity() {
     )
 
     private lateinit var introPage : IntroPageBinding
-    private lateinit var mainPage : MainmenuPageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+<<<<<<< HEAD
         /*
         // This is to test the main menu page without the need for login
         mainPage = MainmenuPageBinding.inflate(layoutInflater)
@@ -57,6 +57,8 @@ class MainActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
          */
+=======
+>>>>>>> 097de54d26165d2e4a4de5e448b705b1683a990b
         // ViewBinding
         introPage = IntroPageBinding.inflate(layoutInflater)
 
@@ -74,23 +76,23 @@ class MainActivity : AppCompatActivity() {
         introPage.quote.text = quotes[randomIndexQ]
 
         // Accessing getStarted button
-        val getStarted = introPage.getStarted
+        val getStarted = introPage.introGetstarted
 
         // Adding underline in getStarted text
         val spannableString = SpannableString(getStarted.text)
         spannableString.setSpan(UnderlineSpan(), 0, getStarted.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        introPage.getStarted.text = spannableString
+        introPage.introGetstarted.text = spannableString
 
         // Set view for intro_page.xml
         setContentView(introPage.root)
 
         // getStarted button taking you to signup_page.xml
         getStarted.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
+            val intentToLogin = Intent(this, LoginActivity::class.java)
 
-            intent.putExtra(SignUpActivity.BACKGROUND_RESOURCE_ID, backgroundImages[randomIndexBG])
+            intentToLogin.putExtra(LoginActivity.BACKGROUND_RESOURCE_ID, backgroundImages[randomIndexBG])
 
-            startActivity(intent)
+            startActivity(intentToLogin)
         }
 
 

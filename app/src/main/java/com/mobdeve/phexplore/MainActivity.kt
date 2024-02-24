@@ -29,35 +29,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        /*
-        // This is to test the main menu page without the need for login
-        mainPage = MainmenuPageBinding.inflate(layoutInflater)
-        setContentView(mainPage.root)
-        val data = DataGenerator.loadData()
-        mainPage.menuRecyclerView.adapter = MainViewAdapter(data)
-        val likedLocations = ArrayList<String>()
-        val likedImages = ArrayList<Int>()
-        val linearLayoutManager = LinearLayoutManager(this)
-        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        mainPage.menuRecyclerView.layoutManager = linearLayoutManager
-        mainPage.userdp.setOnClickListener{
-
-            val intent = Intent(applicationContext, UserMenuActivity::class.java)
-            data.forEach {
-                if(it.isLiked) {
-                    likedLocations.add(it.destName)
-                    likedImages.add(it.destImage)
-                    Toast.makeText(this, it.destName, Toast.LENGTH_SHORT).show()
-                }
-            }
-            intent.putExtra("LIKED_LOCATIONS", likedLocations)
-            intent.putExtra("LIKED_IMAGES", likedImages)
-
-            this.startActivity(intent)
-        }
-         */
-
         // ViewBinding
         introPage = IntroPageBinding.inflate(layoutInflater)
 

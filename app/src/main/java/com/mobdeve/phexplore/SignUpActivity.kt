@@ -50,18 +50,13 @@ class SignUpActivity : AppCompatActivity() {
         if(backgroundImage != 0){
             signupPage.backgroundSignup.setImageResource(backgroundImage)
         }
-        /* Debugging
-        else {
-            // Handle the case where no background resource ID is passed
-            // You can set a default background or show an error message
-            Log.e("SignUpActivity", "No background resource ID provided")
-        }
-         */
 
         // Getting the Sign Up Button and going to the Main Menu
         val signupButton = signupPage.signupButton
 
         signupButton.setOnClickListener{
+
+            finish()
 
             val intentToMainMenu = Intent(this, MainViewActivity::class.java)
 
@@ -72,15 +67,19 @@ class SignUpActivity : AppCompatActivity() {
         // Switching to the Login page
         signupLoginSwitch.setOnClickListener{
 
-            val intentToSignUp = Intent(this, LoginActivity::class.java)
+            finish()
 
-            intentToSignUp.putExtra(LoginActivity.BACKGROUND_RESOURCE_ID, BACKGROUND_RESOURCE_ID)
+            val intentToLogin = Intent(this, LoginActivity::class.java)
 
-            startActivity(intentToSignUp)
+            intentToLogin.putExtra(LoginActivity.BACKGROUND_RESOURCE_ID, backgroundImage)
+
+            startActivity(intentToLogin)
         }
 
         // Going to the Main Menu but skipping credentials
         signupSkip.setOnClickListener{
+
+            finish()
 
             val intentToMainMenuViaSkip = Intent(this, MainViewActivity::class.java)
 

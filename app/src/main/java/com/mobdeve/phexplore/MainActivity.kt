@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         // Set view for intro_page.xml
         setContentView(introPage.root)
 
-        // getStarted button taking you to signup_page.xml
+        // getStarted button taking you to Login Page
         getStarted.setOnClickListener {
             val intentToLogin = Intent(this, LoginActivity::class.java)
 
@@ -64,7 +64,5 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intentToLogin)
         }
-
-
     }
 }

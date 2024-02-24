@@ -2,7 +2,12 @@ package com.mobdeve.phexplore
 
 import android.content.Intent
 import android.os.Bundle
+<<<<<<< Updated upstream
 import android.widget.Toast
+=======
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+>>>>>>> Stashed changes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobdeve.phexplore.databinding.MainmenuPageBinding
@@ -17,6 +22,14 @@ class MainViewActivity : AppCompatActivity()  {
     private lateinit var likedLocations:ArrayList<String>
     private lateinit var likedImages:ArrayList<Int>
 
+    private val viewMenuLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+        if (result.resultCode == RESULT_OK) {
+            val test = 1
+
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,7 +43,7 @@ class MainViewActivity : AppCompatActivity()  {
         this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
 
 
-        mainmenuPage.menuRecyclerView.adapter = MainViewAdapter(DataGenerator.loadData())
+        mainmenuPage.menuRecyclerView.adapter = MainViewAdapter(DataGenerator.loadData(), viewMenuLauncher)
 
         val linearLayoutManager = LinearLayoutManager(this)
 

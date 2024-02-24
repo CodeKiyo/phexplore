@@ -65,6 +65,7 @@ class SignUpActivity : AppCompatActivity() {
 
             val intentToMainMenu = Intent(this, MainViewActivity::class.java)
 
+            intentToMainMenu.putExtra(MainViewActivity.signup_username_input, signupPage.signupUsernameInput.text.toString())
             startActivity(intentToMainMenu)
         }
 

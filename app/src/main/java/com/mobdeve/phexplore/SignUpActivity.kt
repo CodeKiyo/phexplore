@@ -43,8 +43,6 @@ class SignUpActivity : AppCompatActivity() {
 
         // Accepting the Intent from MainActivity
         val intentFromLoginActivity = intent
-
-        // Getting the Background Drawable
         val backgroundImage = intentFromLoginActivity.getIntExtra(BACKGROUND_RESOURCE_ID, 0)
 
         if(backgroundImage != 0){
@@ -56,34 +54,31 @@ class SignUpActivity : AppCompatActivity() {
 
         signupButton.setOnClickListener{
 
-            finish()
-
             val intentToMainMenu = Intent(this, MainViewActivity::class.java)
 
             intentToMainMenu.putExtra(MainViewActivity.signup_username_input, signupPage.signupUsernameInput.text.toString())
             startActivity(intentToMainMenu)
+            finish()
         }
 
         // Switching to the Login page
         signupLoginSwitch.setOnClickListener{
-
-            finish()
 
             val intentToLogin = Intent(this, LoginActivity::class.java)
 
             intentToLogin.putExtra(LoginActivity.BACKGROUND_RESOURCE_ID, backgroundImage)
 
             startActivity(intentToLogin)
+            finish()
         }
 
         // Going to the Main Menu but skipping credentials
         signupSkip.setOnClickListener{
 
-            finish()
-
             val intentToMainMenuViaSkip = Intent(this, MainViewActivity::class.java)
 
             startActivity(intentToMainMenuViaSkip)
+            finish()
         }
     }
 }

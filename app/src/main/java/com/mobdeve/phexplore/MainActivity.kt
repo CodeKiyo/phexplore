@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
             intentToLogin.putExtra(LoginActivity.BACKGROUND_RESOURCE_ID, backgroundImages[randomIndexBG])
 
             startActivity(intentToLogin)
+            finish()
         }
     }
 }

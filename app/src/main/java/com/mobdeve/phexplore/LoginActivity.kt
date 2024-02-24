@@ -1,6 +1,10 @@
 package com.mobdeve.phexplore
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.mobdeve.phexplore.databinding.LoginPageBinding
@@ -20,6 +24,21 @@ class LoginActivity : AppCompatActivity() {
         // ViewBinding
         loginPage = LoginPageBinding.inflate(layoutInflater)
 
+        // Accessing login_signup_switch textview
+        val loginSignupSwitch = loginPage.loginSignupSwitch
+
+        // Adding underline in login_signup-switch text
+        val spannableString1 = SpannableString(loginSignupSwitch.text)
+        spannableString1.setSpan(UnderlineSpan(), 0, loginSignupSwitch.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        loginSignupSwitch.text = spannableString1
+
+        // Accessing login_skip textview
+        val loginSkip = loginPage.loginSkip
+
+        // Adding underline in login_skip text
+        val spannableString2 = SpannableString(loginSkip.text)
+        spannableString2.setSpan(UnderlineSpan(), 0, loginSkip.text.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        loginSkip.text = spannableString2
 
         // Set view for signup_page.xml
         setContentView(loginPage.root)
@@ -28,14 +47,46 @@ class LoginActivity : AppCompatActivity() {
         val intentFromMainActivity = intent
 
         // Getting the Background Drawable
-        val backgroundImage = intentFromMainActivity.getIntExtra(SignUpActivity.BACKGROUND_RESOURCE_ID, 0)
+        val backgroundImage = intentFromMainActivity.getIntExtra(BACKGROUND_RESOURCE_ID, 0)
 
+        // Setting the Background Drawable
         if(backgroundImage != 0){
-            // loginPage.backgroundSignup.setImageResource(backgroundImage)
-        }else {
+            loginPage.backgroundLogin.setImageResource(backgroundImage)
+        }
+        /* Debugging
+        else {
             // Handle the case where no background resource ID is passed
             // You can set a default background or show an error message
-            Log.e("SignUpActivity", "No background resource ID provided")
+            Log.e("LoginActivity", "No background resource ID provided")
+        }
+         */
+
+        // Getting the Login Button and going to the Main Menu
+        val loginButton = loginPage.loginButton
+
+        loginButton.setOnClickListener{
+
+            val intentToMainMenu = Intent(this, MainViewActivity::class.java)
+
+            startActivity(intentToMainMenu)
+        }
+
+        // Switching to the Sign Up page
+        loginSignupSwitch.setOnClickListener{
+
+            val intentToSignUp = Intent(this, SignUpActivity::class.java)
+
+            intentToSignUp.putExtra(SignUpActivity.BACKGROUND_RESOURCE_ID, BACKGROUND_RESOURCE_ID)
+
+            startActivity(intentToSignUp)
+        }
+
+        // Going to the Main Menu but skipping credentials
+        loginSkip.setOnClickListener{
+
+            val intentToMainMenuViaSkip = Intent(this, MainViewActivity::class.java)
+
+            startActivity(intentToMainMenuViaSkip)
         }
     }
 }

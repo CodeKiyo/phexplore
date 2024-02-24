@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-<<<<<<< HEAD
+
         /*
         // This is to test the main menu page without the need for login
         mainPage = MainmenuPageBinding.inflate(layoutInflater)
@@ -57,8 +57,7 @@ class MainActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
          */
-=======
->>>>>>> 097de54d26165d2e4a4de5e448b705b1683a990b
+
         // ViewBinding
         introPage = IntroPageBinding.inflate(layoutInflater)
 

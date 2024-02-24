@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -40,5 +41,14 @@ class SignUpActivity : AppCompatActivity() {
             // You can set a default background or show an error message
             Log.e("SignUpActivity", "No background resource ID provided")
         }
+
+        val signupButton = this.signupPage.signupCreateaccount
+        signupButton.setOnClickListener {
+            val testIntent = Intent(this, MainViewActivity::class.java)
+            testIntent.putExtra(MainViewActivity.signup_username_input, signupPage.signupUsernameInput.text.toString())
+            startActivity(testIntent)
+        }
+
+
     }
 }

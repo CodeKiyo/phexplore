@@ -1,12 +1,16 @@
 package com.mobdeve.phexplore
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import com.mobdeve.phexplore.databinding.LoginPageBinding
 import kotlin.math.log
 
@@ -17,6 +21,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private lateinit var loginPage: LoginPageBinding
+
+    // Variables to determine the state of each input as valid before logging in
+    // Should be used as conditions in logging in and moving to the MainMenuView only if are set to true
+    private var usernameState = false
+    private var passwordState = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,16 +61,29 @@ class LoginActivity : AppCompatActivity() {
             loginPage.backgroundLogin.setImageResource(backgroundImage)
         }
 
+        // Error and Validation Mode in username and password for Login
+        // The logic should be implemented inside the loginButton
+        val usernameInputLayout = loginPage.loginUsernameLayout
+        val usernameInput = loginPage.loginUsernameInput
+        val passwordInputLayout = loginPage.loginPasswordLayout
+        val passwordInput = loginPage.loginPasswordInput
+
+
         // Getting the Login Button and going to the Main Menu
         val loginButton = loginPage.loginButton
 
         loginButton.setOnClickListener{
 
+            // This is where the checking of existing or registered username and password should be implemented
+            // And it should wrap the next if statement below inside {}
 
-            val intentToMainMenu = Intent(this, MainViewActivity::class.java)
+                    // Should have an if statement about the state variables
+                    // similar to the logic implemented in SignUpActivity.kt signup button
 
-            startActivity(intentToMainMenu)
-            finish()
+                    val intentToMainMenu = Intent(this, MainViewActivity::class.java)
+
+                    startActivity(intentToMainMenu)
+                    finish()
         }
 
         // Switching to the Sign Up page

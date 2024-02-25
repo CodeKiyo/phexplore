@@ -11,4 +11,10 @@
     <color name="AlphaCenter">#00C8C6</color>
     <color name="AlphaEnd">#009FFF</color>
 
+    <!-- Start Icon Tint Colors -->
+    <color name="Default">#49454F</color>
+    <color name="Error">#FFB3261E</color>
+    <color name="Valid">#00BA00</color>
+    <color name="Required">#FF0000</color>
+
 </resources>

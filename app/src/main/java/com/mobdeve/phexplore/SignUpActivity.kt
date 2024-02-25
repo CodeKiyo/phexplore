@@ -316,6 +316,9 @@ class SignUpActivity : AppCompatActivity() {
             if(usernameState && emailState && passwordState && birthdayState) {
 
                 // Should also be where insertion of credentials to Firestore Database are implemented
+                // A document in the registered users will be inserted
+                // And there will be a cloning of the original MainMenu views collection
+                // In which, the registered user will use the cloned collection
 
                 val intentToMainMenu = Intent(this, MainViewActivity::class.java)
 

@@ -89,6 +89,7 @@
             android:fontFamily="@font/saxony_serial_bold"
             android:text="@string/get_started"
             android:textAlignment="center"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold"
             app:cornerRadius="16dp"

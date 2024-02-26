@@ -80,6 +80,7 @@
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#949494"
                     app:counterEnabled="false"
+                    app:cursorColor="#49454F"
                     app:endIconMode="clear_text"
                     app:helperText="Enter your username"
                     app:helperTextTextColor="#49454F"
@@ -96,6 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
+                        android:textColorHighlight="#949494"
                         android:textSize="12sp"
                         app:fontFamily="@font/jetbrainsmono_medium" />
 
@@ -114,6 +116,7 @@
                     app:boxBackgroundMode="outline"
                     app:boxStrokeColor="#949494"
                     app:counterEnabled="false"
+                    app:cursorColor="#49454F"
                     app:endIconMode="password_toggle"
                     app:helperText="Enter your password"
                     app:helperTextTextColor="#49454F"
@@ -130,6 +133,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
+                        android:textColorHighlight="#949494"
                         android:textSize="12sp"
                         app:fontFamily="@font/jetbrainsmono_medium" />
 

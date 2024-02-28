@@ -1,3 +1,5 @@
+
+/*
 package com.mobdeve.phexplore
 
 import androidx.appcompat.app.AppCompatActivity
@@ -6,10 +8,10 @@ import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mobdeve.phexplore.databinding.ActivityUserMenuBinding
+//import com.mobdeve.phexplore.databinding.ActivityUserMenuBinding
 
 class UserMenuActivity : AppCompatActivity() {
-    private lateinit var userMenuBinding: ActivityUserMenuBinding
+    //private lateinit var userMenuBinding: ActivityUserMenuBinding
     private val likedLocations = ArrayList<DestinationModel>()
 
     private val viewMenuLauncher = registerForActivityResult(
@@ -21,8 +23,8 @@ class UserMenuActivity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        userMenuBinding = ActivityUserMenuBinding.inflate(layoutInflater)
-        setContentView(userMenuBinding.root)
+        //userMenuBinding = ActivityUserMenuBinding.inflate(layoutInflater)
+        //setContentView(userMenuBinding.root)
         val getLikedLocations = intent.getStringArrayListExtra("LIKED_LOCATIONS")
         val getLikedImages = intent.getIntegerArrayListExtra("LIKED_IMAGES")
         Log.d("ReceivedData", "Liked Locations: ${getLikedLocations?.joinToString()}")
@@ -35,9 +37,10 @@ class UserMenuActivity : AppCompatActivity() {
         }
 
         val data = DataGenerator.loadData()
-        userMenuBinding.menuRecyclerView.adapter = HomeMenuViewAdapter(likedLocations, viewMenuLauncher)
+        //userMenuBinding.menuRecyclerView.adapter = HomeMenuViewAdapter(likedLocations, viewMenuLauncher)
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        userMenuBinding.menuRecyclerView.layoutManager = linearLayoutManager
+        //userMenuBinding.menuRecyclerView.layoutManager = linearLayoutManager
     }
 }
+*/

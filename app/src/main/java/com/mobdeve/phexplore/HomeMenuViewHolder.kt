@@ -8,16 +8,5 @@ class HomeMenuViewHolder(private val viewBinding: MenuitemLayoutBinding): Recycl
     fun bindData(model: DestinationModel) {
         this.viewBinding.destName.text = model.destName
         this.viewBinding.destImage.setImageResource(model.destImage)
-        if(model.isLiked) {
-            this.viewBinding.likeButton.setImageResource(R.drawable.heart_red)
-        } else {
-            this.viewBinding.likeButton.setImageResource(R.drawable.heart_svgrepo_com)
-        }
-    }
-    fun setLikeSwitchClickListener(onClickListener: View.OnClickListener){
-        this.viewBinding.likeButton.setOnClickListener(onClickListener)
-    }
-    fun setLikeButtonImageResource(resourceId: Int) {
-        this.viewBinding.likeButton.setImageResource(resourceId)
     }
 }

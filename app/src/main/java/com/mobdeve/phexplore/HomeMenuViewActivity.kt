@@ -1,20 +1,17 @@
 package com.mobdeve.phexplore
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mobdeve.phexplore.databinding.MainmenuPageBinding
-
+import com.mobdeve.phexplore.databinding.UserPageBinding
 class HomeMenuViewActivity : AppCompatActivity()  {
-
     companion object{
         const val signup_username_input : String = "SIGNUP_USERNAME_INPUT"
     }
 
-    private lateinit var mainmenuPage: MainmenuPageBinding
+    private lateinit var mainmenuPage: UserPageBinding
     private lateinit var likedLocations:ArrayList<String>
     private lateinit var likedImages:ArrayList<Int>
 
@@ -29,27 +26,28 @@ class HomeMenuViewActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mainmenuPage = MainmenuPageBinding.inflate(layoutInflater)
+        mainmenuPage = UserPageBinding.inflate(layoutInflater)
 
         setContentView(mainmenuPage.root)
 
         // Replaces the username with what the user inputs from the Sign Up Page
-        this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
+        this.mainmenuPage.username.text = intent.getStringExtra(HomeMenuViewActivity.signup_username_input).toString()
 
 
-        mainmenuPage.menuRecyclerView.adapter = HomeMenuViewAdapter(DataGenerator.loadData(), viewMenuLauncher)
+        // Create LinearLayoutManager instances for each RecyclerView
+        val popularLinearLayoutManager = LinearLayoutManager(this)
+        val recentLinearLayoutManager = LinearLayoutManager(this)
 
-        val linearLayoutManager = LinearLayoutManager(this)
+        // Set the orientation for each LinearLayoutManager
+        popularLinearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        recentLinearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
-        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        // Set the LayoutManagers to the corresponding RecyclerViews
+        mainmenuPage.popularRecyclerview.layoutManager = popularLinearLayoutManager
+        mainmenuPage.recentRecyclerview.layoutManager = recentLinearLayoutManager
 
-        mainmenuPage.menuRecyclerView.layoutManager = linearLayoutManager
-
-        mainmenuPage.userdp.setOnClickListener{
-            val intent = Intent(applicationContext, UserMenuActivity::class.java)
-            intent.putExtra("LIKED_LOCATIONS", likedLocations)
-            intent.putExtra("LIKED_IMAGES", likedImages)
-            this.startActivity(intent)
-        }
+        // Set the adapters for each RecyclerView
+        mainmenuPage.popularRecyclerview.adapter = HomeMenuViewAdapter(DataGenerator.loadData(), viewMenuLauncher)
+        mainmenuPage.recentRecyclerview.adapter = HomeMenuViewRecentAdapter(DataGenerator.loadData())
     }
 }

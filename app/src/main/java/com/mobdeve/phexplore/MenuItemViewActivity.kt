@@ -1,5 +1,6 @@
 package com.mobdeve.phexplore
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mobdeve.phexplore.databinding.MenuitemviewPageBinding
@@ -9,7 +10,7 @@ class MenuItemViewActivity : AppCompatActivity()  {
     companion object{
         const val dest_name : String = "DEST_NAME"
         const val dest_description : String = "DEST_DESCRIPTION"
-        const val dest_image : Int = 1
+        const val dest_image : String = "DEST_IMAGE"
 
     }
 
@@ -25,6 +26,6 @@ class MenuItemViewActivity : AppCompatActivity()  {
         // Replaces the username with what the user inputs from the Sign Up Page
         this.menuitemPage.destName.text = intent.getStringExtra(dest_name).toString()
         this.menuitemPage.destDescription.text = intent.getStringExtra(dest_description).toString()
-        this.menuitemPage.destImage.setImageResource(R.drawable.mainmenu_destimage_img)
+        this.menuitemPage.destImage.setImageResource(intent.getIntExtra(dest_image, 0))
     }
 }

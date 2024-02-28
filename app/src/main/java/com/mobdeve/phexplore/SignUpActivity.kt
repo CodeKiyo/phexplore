@@ -7,13 +7,11 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.UnderlineSpan
-import android.util.Log
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener
 import com.mobdeve.phexplore.databinding.SignupPageBinding
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -320,10 +318,10 @@ class SignUpActivity : AppCompatActivity() {
                 // And there will be a cloning of the original MainMenu views collection
                 // In which, the registered user will use the cloned collection
 
-                val intentToMainMenu = Intent(this, MainViewActivity::class.java)
+                val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
 
                 intentToMainMenu.putExtra(
-                    MainViewActivity.signup_username_input,
+                    HomeMenuViewActivity.signup_username_input,
                     signupPage.signupUsernameInput.text.toString()
                 )
                 startActivity(intentToMainMenu)
@@ -345,7 +343,7 @@ class SignUpActivity : AppCompatActivity() {
         // Going to the Main Menu but skipping credentials
         signupSkip.setOnClickListener{
 
-            val intentToMainMenuViaSkip = Intent(this, MainViewActivity::class.java)
+            val intentToMainMenuViaSkip = Intent(this, HomeMenuViewActivity::class.java)
 
             startActivity(intentToMainMenuViaSkip)
             finish()

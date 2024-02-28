@@ -35,7 +35,7 @@ class UserMenuActivity : AppCompatActivity() {
         }
 
         val data = DataGenerator.loadData()
-        userMenuBinding.menuRecyclerView.adapter = MainViewAdapter(likedLocations, viewMenuLauncher)
+        userMenuBinding.menuRecyclerView.adapter = HomeMenuViewAdapter(likedLocations, viewMenuLauncher)
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         userMenuBinding.menuRecyclerView.layoutManager = linearLayoutManager

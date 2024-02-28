@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobdeve.phexplore.databinding.MainmenuPageBinding
 
-class MainViewActivity : AppCompatActivity()  {
+class HomeMenuViewActivity : AppCompatActivity()  {
 
     companion object{
         const val signup_username_input : String = "SIGNUP_USERNAME_INPUT"
@@ -37,7 +37,7 @@ class MainViewActivity : AppCompatActivity()  {
         this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
 
 
-        mainmenuPage.menuRecyclerView.adapter = MainViewAdapter(DataGenerator.loadData(), viewMenuLauncher)
+        mainmenuPage.menuRecyclerView.adapter = HomeMenuViewAdapter(DataGenerator.loadData(), viewMenuLauncher)
 
         val linearLayoutManager = LinearLayoutManager(this)
 

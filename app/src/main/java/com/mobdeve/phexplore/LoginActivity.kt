@@ -1,18 +1,12 @@
 package com.mobdeve.phexplore
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import com.mobdeve.phexplore.databinding.LoginPageBinding
-import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
     // redirect ko yung main activity to login activity instead of signup activity soon
@@ -80,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
                     // Should have an if statement about the state variables
                     // similar to the logic implemented in SignUpActivity.kt signup button
 
-                    val intentToMainMenu = Intent(this, MainViewActivity::class.java)
+                    val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
 
                     startActivity(intentToMainMenu)
                     finish()
@@ -100,7 +94,7 @@ class LoginActivity : AppCompatActivity() {
         // Going to the Main Menu but skipping credentials
         loginSkip.setOnClickListener{
 
-            val intentToMainMenuViaSkip = Intent(this, MainViewActivity::class.java)
+            val intentToMainMenuViaSkip = Intent(this, HomeMenuViewActivity::class.java)
 
             startActivity(intentToMainMenuViaSkip)
             finish()

@@ -4,11 +4,10 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mobdeve.phexplore.databinding.MenuitemLayoutBinding
 
-class MainViewAdapter(private val data: ArrayList<DestinationModel>, private val test: ActivityResultLauncher<Intent>) : RecyclerView.Adapter<MainViewHolder>() {
+class HomeMenuViewAdapter(private val data: ArrayList<DestinationModel>, private val test: ActivityResultLauncher<Intent>) : RecyclerView.Adapter<HomeMenuViewHolder>() {
 
     companion object{
         const val dest_name : String = "DEST_NAME"
@@ -16,16 +15,16 @@ class MainViewAdapter(private val data: ArrayList<DestinationModel>, private val
         const val dest_image : Int = 1
 
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeMenuViewHolder {
         val viewBinding: MenuitemLayoutBinding = MenuitemLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false)
-        return MainViewHolder(viewBinding)
+        return HomeMenuViewHolder(viewBinding)
     }
 
 
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeMenuViewHolder, position: Int) {
         holder.bindData(this.data[position])
         holder.setLikeSwitchClickListener {
             if (this.data[position].isLiked) {

@@ -7,5 +7,6 @@ class HomeMenuViewRecentHolder(private val viewBinding: MenuitemrecentLayoutBind
     fun bindData(model: DestinationModel) {
         this.viewBinding.recentDestname.text = model.destName
         this.viewBinding.recentDestimg.setImageResource(model.destImage)
+        this.viewBinding.recentDestcity.text = model.destCity
     }
 }

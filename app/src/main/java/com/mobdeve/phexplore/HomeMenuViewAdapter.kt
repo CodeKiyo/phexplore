@@ -4,10 +4,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.mobdeve.phexplore.databinding.MenuitemLayoutBinding
 
-class HomeMenuViewAdapter(private val data: ArrayList<DestinationModel>, private val test: ActivityResultLauncher<Intent>) : RecyclerView.Adapter<HomeMenuViewHolder>() {
+class HomeMenuViewAdapter(private val data: ArrayList<DestinationModel>) : RecyclerView.Adapter<HomeMenuViewHolder>() {
 
     companion object{
         const val dest_name : String = "DEST_NAME"
@@ -31,7 +32,7 @@ class HomeMenuViewAdapter(private val data: ArrayList<DestinationModel>, private
             intentToViewItem.putExtra(dest_name, this.data[(position)].destName)
             intentToViewItem.putExtra(dest_description, this.data[(position)].destDescription)
             intentToViewItem.putExtra(dest_image, this.data[(position)].destImage)
-            test.launch(intentToViewItem)
+            startActivity(holder.itemView.context, intentToViewItem, null)
         }
     }
     override fun getItemCount(): Int {

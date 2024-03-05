@@ -15,14 +15,6 @@ class HomeMenuViewActivity : AppCompatActivity()  {
     private lateinit var likedLocations:ArrayList<String>
     private lateinit var likedImages:ArrayList<Int>
 
-    private val viewMenuLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-        if (result.resultCode == RESULT_OK) {
-            val test = 1
-
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,7 +23,7 @@ class HomeMenuViewActivity : AppCompatActivity()  {
         setContentView(mainmenuPage.root)
 
         // Replaces the username with what the user inputs from the Sign Up Page
-        this.mainmenuPage.username.text = intent.getStringExtra(HomeMenuViewActivity.signup_username_input).toString()
+        this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
 
 
         // Create LinearLayoutManager instances for each RecyclerView
@@ -47,7 +39,7 @@ class HomeMenuViewActivity : AppCompatActivity()  {
         mainmenuPage.recentRecyclerview.layoutManager = recentLinearLayoutManager
 
         // Set the adapters for each RecyclerView
-        mainmenuPage.popularRecyclerview.adapter = HomeMenuViewAdapter(DataGenerator.loadData(), viewMenuLauncher)
+        mainmenuPage.popularRecyclerview.adapter = HomeMenuViewAdapter(DataGenerator.loadData())
         mainmenuPage.recentRecyclerview.adapter = HomeMenuViewRecentAdapter(DataGenerator.loadData())
     }
 }

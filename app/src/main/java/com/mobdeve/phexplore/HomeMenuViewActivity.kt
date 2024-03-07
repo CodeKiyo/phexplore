@@ -1,45 +1,42 @@
 package com.mobdeve.phexplore
 
 import android.os.Bundle
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mobdeve.phexplore.databinding.UserPageBinding
+import androidx.recyclerview.widget.PagerSnapHelper
+import com.mobdeve.phexplore.databinding.HomemenuPageBinding
 class HomeMenuViewActivity : AppCompatActivity()  {
     companion object{
         const val signup_username_input : String = "SIGNUP_USERNAME_INPUT"
     }
 
-    private lateinit var mainmenuPage: UserPageBinding
+    private lateinit var mainmenuPage: HomemenuPageBinding
     private lateinit var likedLocations:ArrayList<String>
     private lateinit var likedImages:ArrayList<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mainmenuPage = UserPageBinding.inflate(layoutInflater)
+        mainmenuPage = HomemenuPageBinding.inflate(layoutInflater)
 
         setContentView(mainmenuPage.root)
 
         // Replaces the username with what the user inputs from the Sign Up Page
         this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
 
-
-        // Create LinearLayoutManager instances for each RecyclerView
-        val popularLinearLayoutManager = LinearLayoutManager(this)
-        val recentLinearLayoutManager = LinearLayoutManager(this)
-
         // Set the orientation for each LinearLayoutManager
-        popularLinearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        recentLinearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
         // Set the LayoutManagers to the corresponding RecyclerViews
-        mainmenuPage.popularRecyclerview.layoutManager = popularLinearLayoutManager
-        mainmenuPage.recentRecyclerview.layoutManager = recentLinearLayoutManager
+        mainmenuPage.horizontalRecyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        mainmenuPage.verticalRecyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        mainmenuPage.verticalRecyclerView.isNestedScrollingEnabled = false
+        mainmenuPage.verticalRecyclerView.setHasFixedSize(false)
 
         // Set the adapters for each RecyclerView
-        mainmenuPage.popularRecyclerview.adapter = HomeMenuViewAdapter(DataGenerator.loadData())
-        mainmenuPage.recentRecyclerview.adapter = HomeMenuViewRecentAdapter(DataGenerator.loadData())
+        mainmenuPage.horizontalRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),0)
+        mainmenuPage.verticalRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),1)
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(mainmenuPage.horizontalRecyclerView)
+
     }
 }

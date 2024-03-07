@@ -11,6 +11,7 @@ class MenuItemViewActivity : AppCompatActivity()  {
         const val dest_name : String = "DEST_NAME"
         const val dest_description : String = "DEST_DESCRIPTION"
         const val dest_image : String = "DEST_IMAGE"
+        const val dest_city : String = "DEST_CITY"
 
     }
 
@@ -27,5 +28,6 @@ class MenuItemViewActivity : AppCompatActivity()  {
         this.menuitemPage.destName.text = intent.getStringExtra(dest_name).toString()
         this.menuitemPage.destDescription.text = intent.getStringExtra(dest_description).toString()
         this.menuitemPage.destImage.setImageResource(intent.getIntExtra(dest_image, 0))
+        this.menuitemPage.destCity.text = intent.getStringExtra(dest_city).toString()
     }
 }

@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.SnapHelper
 import com.mobdeve.phexplore.databinding.IntroPageBinding
 import kotlin.random.Random
 import com.mobdeve.phexplore.databinding.HomemenuPageBinding
-import com.mobdeve.phexplore.databinding.UserPageBinding
 
 class MainActivity : AppCompatActivity() {
     // RNG Background Image for intro_page.xml

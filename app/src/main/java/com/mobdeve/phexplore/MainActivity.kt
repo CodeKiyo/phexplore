@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
     )
 
     private lateinit var introPage : IntroPageBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

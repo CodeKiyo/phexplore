@@ -13,6 +13,8 @@ class DestinationAdapter(private val data: ArrayList<DestinationModel>, private 
         var view = LayoutInflater.from(parent.context).inflate(R.layout.horizontal_recycler, parent, false)
         if (orientationKey == 1)
             view = LayoutInflater.from(parent.context).inflate(R.layout.vertical_recycler, parent, false)
+        else if (orientationKey == 2)
+            view = LayoutInflater.from(parent.context).inflate(R.layout.user_page_favorites, parent, false)
         return DestinationViewHolder(view)
     }
 

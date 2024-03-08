@@ -1,5 +1,6 @@
 package com.mobdeve.phexplore
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,6 +38,12 @@ class HomeMenuViewActivity : AppCompatActivity()  {
         mainmenuPage.verticalRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),1)
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(mainmenuPage.horizontalRecyclerView)
+
+        //attach clicklistener to user picture
+        mainmenuPage.userDp.setOnClickListener {
+            val intent = Intent(this, UserPage::class.java)
+            startActivity(intent)
+        }
 
     }
 }

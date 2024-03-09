@@ -16,7 +16,7 @@ class MenuItemViewActivity : AppCompatActivity()  {
     }
 
     private lateinit var menuitemPage: MenuitemviewPageBinding
-
+    private var isLiked = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,5 +29,14 @@ class MenuItemViewActivity : AppCompatActivity()  {
         this.menuitemPage.destDescription.text = intent.getStringExtra(dest_description).toString()
         this.menuitemPage.destImage.setImageResource(intent.getIntExtra(dest_image, 0))
         this.menuitemPage.destCity.text = intent.getStringExtra(dest_city).toString()
+        this.menuitemPage.bookmarkBtn.setOnClickListener {
+            if (this.isLiked) {
+                this.menuitemPage.bookmarkBtn.setImageResource(R.drawable.bookmark_black)
+                this.isLiked = false
+            } else {
+                this.menuitemPage.bookmarkBtn.setImageResource(R.drawable.bookmark_yellow)
+                this.isLiked = true
+            }
+        }
     }
 }

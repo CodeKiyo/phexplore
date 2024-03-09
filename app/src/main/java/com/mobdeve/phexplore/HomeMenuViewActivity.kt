@@ -1,5 +1,6 @@
 package com.mobdeve.phexplore
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +23,7 @@ class HomeMenuViewActivity : AppCompatActivity()  {
         setContentView(mainmenuPage.root)
 
         // Replaces the username with what the user inputs from the Sign Up Page
-        // this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
+        this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
 
         // Set the orientation for each LinearLayoutManager
 
@@ -35,5 +36,14 @@ class HomeMenuViewActivity : AppCompatActivity()  {
         // Set the adapters for each RecyclerView
         mainmenuPage.horizontalRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),0)
         mainmenuPage.verticalRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),1)
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(mainmenuPage.horizontalRecyclerView)
+
+        //attach clicklistener to user picture
+        mainmenuPage.userDp.setOnClickListener {
+            val intent = Intent(this, UserPage::class.java)
+            startActivity(intent)
+        }
+
     }
 }

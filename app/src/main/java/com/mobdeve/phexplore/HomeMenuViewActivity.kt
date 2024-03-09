@@ -22,7 +22,7 @@ class HomeMenuViewActivity : AppCompatActivity()  {
         setContentView(mainmenuPage.root)
 
         // Replaces the username with what the user inputs from the Sign Up Page
-        this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
+        // this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
 
         // Set the orientation for each LinearLayoutManager
 
@@ -35,8 +35,5 @@ class HomeMenuViewActivity : AppCompatActivity()  {
         // Set the adapters for each RecyclerView
         mainmenuPage.horizontalRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),0)
         mainmenuPage.verticalRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),1)
-        val snapHelper = PagerSnapHelper()
-        snapHelper.attachToRecyclerView(mainmenuPage.horizontalRecyclerView)
-
     }
 }

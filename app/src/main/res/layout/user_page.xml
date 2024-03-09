@@ -7,6 +7,87 @@
     android:background="#E6E6E6"
     tools:context=".UserMenuActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <SearchView
+                    android:id="@+id/searchbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="100dp"
+                    android:background="@drawable/rounded_corner"
+                    app:layout_constraintBottom_toTopOf="@+id/textView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/popular_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="14dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="31dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginEnd="253dp"
+                    android:fontFamily="@font/saxony_serial_bold"
+                    android:text="Popular Now!"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/popular_recyclerview"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchbar" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="316dp"
+                    android:layout_marginBottom="14dp"
+                    android:fontFamily="@font/saxony_serial_bold"
+                    android:text="Recent"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/recent_recyclerview"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/popular_recyclerview" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recent_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="114dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -58,64 +139,5 @@
             app:layout_constraintTop_toBottomOf="@+id/welcome" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <SearchView
-        android:id="@+id/searchbar"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/rounded_corner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/popular_recyclerview"
-        android:layout_width="0dp"
-        android:layout_height="350dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="14dp"
-        android:fontFamily="@font/saxony_serial_bold"
-        android:text="Popular Now!"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchbar" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="14dp"
-        android:fontFamily="@font/saxony_serial_bold"
-        android:text="Recent"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/popular_recyclerview" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recent_recyclerview"
-        android:layout_width="0dp"
-        android:layout_height="114dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

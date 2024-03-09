@@ -1,105 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <androidx.core.widget.NestedScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:layout_editor_absoluteY="1dp">
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteY="1dp"
-        android:background="#E6E6E6">
-
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:padding="1dp"
+                app:shapeAppearanceOverlay="@style/circular"
+                app:srcCompat="@drawable/homemenu_profilepicture"
+                app:strokeColor="#00C8C6"
+                app:strokeWidth="2dp" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:layout_gravity="center|start"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/userdp"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="35dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="25dp"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/signup_user_icon" />
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="2.5dp"
+                    android:fontFamily="@font/overpass_regular"
+                    android:text="Welcome,"
+                    android:textSize="10sp" />
 
-                    <TextView
-                        android:id="@+id/welcome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="32dp"
-                        android:fontFamily="@font/jetbrainsmono_medium"
-                        android:text="Welcome"
-                        android:textColor="#868585"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/username"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginBottom="30dp"
-                        android:fontFamily="@font/jetbrainsmono_medium"
-                        android:text="Jose Rizal"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="2.5dp"
+                    android:fontFamily="@font/overpass_regular"
+                    android:text="Peter Griffin"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
-            <SearchView
-                android:id="@+id/searchbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/rounded_corner" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginVertical="10dp"
-                android:text="Recents"
-                android:textSize="32sp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/horizontalRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginVertical="10dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginVertical="10dp"
-                android:text="Destinations"
-                android:textSize="32sp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_gravity="center"
-                android:id="@+id/verticalRecyclerView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginVertical="10dp" />
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/filterRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="60dp" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/overpass_regular"
+            android:text="Popular Destinations"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/horizontalRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:overScrollMode="never" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/overpass_regular"
+            android:text="Explore More"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/verticalRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

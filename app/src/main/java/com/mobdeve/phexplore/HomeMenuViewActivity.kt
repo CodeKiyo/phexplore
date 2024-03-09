@@ -37,13 +37,13 @@ class HomeMenuViewActivity : AppCompatActivity()  {
         mainmenuPage.horizontalRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),0)
         mainmenuPage.verticalRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),1)
 
-        /*
+
         //attach clicklistener to user picture
         mainmenuPage.userDp.setOnClickListener {
             val intent = Intent(this, UserPage::class.java)
             startActivity(intent)
         }
 
-         */
+
     }
 }

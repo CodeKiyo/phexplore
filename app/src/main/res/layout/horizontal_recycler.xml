@@ -8,20 +8,18 @@
     android:gravity="start">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/horizontalCardView"
         android:layout_width="300dp"
         android:layout_height="216dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:backgroundTintMode="screen"
-        android:clickable="true"
+        android:clickable="false"
         android:foreground="?attr/selectableItemBackground"
         android:foregroundTint="#606060"
         app:cardCornerRadius="20dp"
-        app:cardElevation="6dp"
-        tools:ignore="TouchTargetSizeCheck">
+        app:cardElevation="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,6 +43,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/lato_bold"
                 android:text="Intramuros"
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -62,7 +61,7 @@
                     android:layout_height="18dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
-                    android:src="@drawable/homemenu_location_icon" />
+                    android:src="@drawable/homemenu_location_icon1" />
 
                 <TextView
                     android:id="@+id/destLocation"

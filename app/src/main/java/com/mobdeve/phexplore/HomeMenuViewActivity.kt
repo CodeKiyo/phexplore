@@ -36,8 +36,6 @@ class HomeMenuViewActivity : AppCompatActivity()  {
         // Set the adapters for each RecyclerView
         mainmenuPage.horizontalRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),0)
         mainmenuPage.verticalRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),1)
-        val snapHelper = PagerSnapHelper()
-        snapHelper.attachToRecyclerView(mainmenuPage.horizontalRecyclerView)
 
         /*
         //attach clicklistener to user picture

@@ -25,14 +25,14 @@
         android:background="@drawable/round_white"
         android:padding="16dp"
         android:src="@drawable/bookmark_black"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintBottom_toTopOf="@+id/horizontalCardView"
         app:layout_constraintEnd_toEndOf="parent"
         android:translationZ="99dp"
         android:contentDescription="Bookmark Icon" />
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/horizontalCardView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="-20dp"

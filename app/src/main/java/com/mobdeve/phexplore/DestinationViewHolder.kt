@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 
 class DestinationViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
-    private  val name: TextView = itemView.findViewById(R.id.destName)
+    private val name: TextView = itemView.findViewById(R.id.destName)
     private val image: ImageView = itemView.findViewById(R.id.destImage)
     private val location: TextView = itemView.findViewById(R.id.destLocation)
     fun bindData(model: DestinationModel) {

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/user_dp"
             android:layout_width="109dp"
             android:layout_height="105dp"
@@ -19,7 +19,10 @@
             android:adjustViewBounds="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/signup_user_icon" />
+            app:shapeAppearanceOverlay="@style/circular"
+            app:srcCompat="@drawable/homemenu_profilepicture"
+            app:strokeWidth="2dp"
+            android:padding="1dp" />
 
         <TextView
             android:id="@+id/username"
@@ -27,8 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:fontFamily="@font/jetbrainsmono_medium"
-            android:text="Jose Rizal"
+            android:fontFamily="@font/overpass_regular"
+            android:text="Peter Griffin"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/user_dp"
@@ -40,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/overpass_regular"
             android:text="Favorites"
             app:layout_constraintStart_toEndOf="@+id/user_favorites_count"
             app:layout_constraintTop_toBottomOf="@+id/username" />
@@ -50,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/overpass_regular"
             android:text="100"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/user_dp"
@@ -57,9 +62,12 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="0dp"
+            android:layout_width="90sp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/overpass_regular"
             android:text="Favorites"
             android:textAlignment="center"
             android:textSize="16sp"

@@ -16,7 +16,7 @@ class UserPage : AppCompatActivity() {
 
         setContentView(usermenuPage.root)
 
-         usermenuPage.favoriteRecyclerView.layoutManager = GridLayoutManager(this, 2)
+        usermenuPage.favoriteRecyclerView.layoutManager = GridLayoutManager(this, 2)
         // Set the adapters for each RecyclerView
         usermenuPage.favoriteRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),2)
     }

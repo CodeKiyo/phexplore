@@ -5,13 +5,20 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
+import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.ktx.Firebase
 import com.mobdeve.phexplore.databinding.LoginPageBinding
+import com.google.firebase.firestore.ktx.firestore
 
 class LoginActivity : AppCompatActivity() {
     // redirect ko yung main activity to login activity instead of signup activity soon
     companion object{
         const val BACKGROUND_RESOURCE_ID = "BACKGROUND_RESOURCE_ID"
+        private const val TAG = "LoginActivity"
+        const val signup_username_input : String = "SIGNUP_USERNAME_INPUT"
     }
 
     private lateinit var loginPage: LoginPageBinding
@@ -64,21 +71,50 @@ class LoginActivity : AppCompatActivity() {
 
 
         // Getting the Login Button and going to the Main Menu
-        val loginButton = loginPage.loginButton
 
-        loginButton.setOnClickListener{
+        this.loginPage.loginButton.setOnClickListener(View.OnClickListener {
+            val username = this.loginPage.loginUsernameInput.text.toString()
+            //val password = this.loginPage.loginPasswordInput.text.toString()
 
-            // This is where the checking of existing or registered username and password should be implemented
-            // And it should wrap the next if statement below inside {}
+            val db = Firebase.firestore
+            val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
 
-                    // Should have an if statement about the state variables
-                    // similar to the logic implemented in SignUpActivity.kt signup button
+            val usernameQuery = usersRef.whereEqualTo(
+                MyFirestoreReferences.USERNAME_FIELD,
+                username
+            )
 
-                    val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
+            /*
+            val passwordQuery = usersRef.whereEqualTo(
+                MyFirestoreReferences.PASSWORD_FIELD,
+                password
+            )
+             */
 
-                    startActivity(intentToMainMenu)
-                    finish()
-        }
+            usernameQuery.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // If there are no results, inform the user to create an account.
+                    if (task.result.isEmpty) {
+                        val builder = AlertDialog.Builder(this)
+
+                        builder.setMessage("User not found. Create an account to continue")
+                        builder.setCancelable(true)
+
+                        val alert = builder.create()
+                        alert.show()
+                    } else { // Otherwise, login
+
+                        val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
+                        intentToMainMenu.putExtra(IntentKeys.USERNAME.name, username)
+                        intentToMainMenu.putExtra(signup_username_input, username)
+                        startActivity(intentToMainMenu)
+                        finish()
+                    }
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.exception)
+                }
+            }
+        })
 
         // Switching to the Sign Up page
         loginSignupSwitch.setOnClickListener{

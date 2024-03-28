@@ -23,7 +23,7 @@ class HomeMenuViewActivity : AppCompatActivity()  {
         setContentView(mainmenuPage.root)
 
         // Replaces the username with what the user inputs from the Sign Up Page
-        // this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
+        this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
 
         // Set the orientation for each LinearLayoutManager
 

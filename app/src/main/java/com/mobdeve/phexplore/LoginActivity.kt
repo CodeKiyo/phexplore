@@ -74,46 +74,9 @@ class LoginActivity : AppCompatActivity() {
 
         this.loginPage.loginButton.setOnClickListener(View.OnClickListener {
             val username = this.loginPage.loginUsernameInput.text.toString()
-            //val password = this.loginPage.loginPasswordInput.text.toString()
+            val password = this.loginPage.loginPasswordInput.text.toString()
 
-            val db = Firebase.firestore
-            val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
-
-            val usernameQuery = usersRef.whereEqualTo(
-                MyFirestoreReferences.USERNAME_FIELD,
-                username
-            )
-
-            /*
-            val passwordQuery = usersRef.whereEqualTo(
-                MyFirestoreReferences.PASSWORD_FIELD,
-                password
-            )
-             */
-
-            usernameQuery.get().addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    // If there are no results, inform the user to create an account.
-                    if (task.result.isEmpty) {
-                        val builder = AlertDialog.Builder(this)
-
-                        builder.setMessage("User not found. Create an account to continue")
-                        builder.setCancelable(true)
-
-                        val alert = builder.create()
-                        alert.show()
-                    } else { // Otherwise, login
-
-                        val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
-                        intentToMainMenu.putExtra(IntentKeys.USERNAME.name, username)
-                        intentToMainMenu.putExtra(signup_username_input, username)
-                        startActivity(intentToMainMenu)
-                        finish()
-                    }
-                } else {
-                    Log.d(TAG, "Error getting documents: ", task.exception)
-                }
-            }
+            validateAccount(username, password)
         })
 
         // Switching to the Sign Up page
@@ -135,5 +98,68 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intentToMainMenuViaSkip)
             finish()
         }
+    }
+
+    private fun validateAccount(username: String, password: String) {
+        val db = Firebase.firestore
+        val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
+
+        val usernameQuery = usersRef.whereEqualTo(
+            MyFirestoreReferences.USERNAME_FIELD,
+            username
+        )
+
+        val passwordQuery = usersRef.whereEqualTo(
+            MyFirestoreReferences.PASSWORD_FIELD,
+            password
+        )
+
+        usernameQuery.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // If there are no results, inform the user to create an account.
+                if (task.result.isEmpty) {
+                    showError(1)
+                } else { // Otherwise, validate account
+                    passwordQuery.get().addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            // If there are no results, inform the user to enter the correct password
+                            if (task.result.isEmpty) {
+                                showError(2)
+                            } else { // Otherwise, login
+                                loginSuccess(username)
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.exception)
+                        }
+                    }
+                }
+            } else {
+                Log.d(TAG, "Error getting documents: ", task.exception)
+            }
+        }
+    }
+
+    private fun showError(errorKey: Int) {
+        if (errorKey == 1) {
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("User not found. Create an account to continue.")
+            builder.setCancelable(true)
+            val alert = builder.create()
+            alert.show()
+        } else if (errorKey == 2) {
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Wrong password. Please type your correct password.")
+            builder.setCancelable(true)
+            val alert = builder.create()
+            alert.show()
+        }
+    }
+
+    private fun loginSuccess(username: String) {
+        val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
+        intentToMainMenu.putExtra(IntentKeys.USERNAME.name, username)
+        intentToMainMenu.putExtra(signup_username_input, username)
+        startActivity(intentToMainMenu)
+        finish()
     }
 }

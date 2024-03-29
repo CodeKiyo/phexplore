@@ -1,6 +1,8 @@
 package com.mobdeve.phexplore
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Spannable
@@ -10,12 +12,14 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.mobdeve.phexplore.databinding.IntroPageBinding
 import kotlin.random.Random
 import com.mobdeve.phexplore.databinding.HomemenuPageBinding
+import java.io.ByteArrayOutputStream
 
 class MainActivity : AppCompatActivity() {
     // RNG Background Image for intro_page.xml

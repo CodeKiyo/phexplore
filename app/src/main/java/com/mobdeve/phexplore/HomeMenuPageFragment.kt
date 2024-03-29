@@ -19,6 +19,7 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
 
     private lateinit var horizontalRecyclerView: RecyclerView
     private lateinit var verticalRecyclerView: RecyclerView
+    private lateinit var filterRecyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +42,11 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
             val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.BottomNavigation)
             bottomNav?.selectedItemId = R.id.bottom_user
         }
+
+        // The Code for Filter Recycler View
+        filterRecyclerView = view.findViewById(R.id.filterRecyclerView)
+        filterRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        filterRecyclerView.adapter = FilterAdapter(FilterGenerator.loadData())
 
         /*
         this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()

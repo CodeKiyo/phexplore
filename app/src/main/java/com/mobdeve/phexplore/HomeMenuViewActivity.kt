@@ -22,10 +22,6 @@ class HomeMenuViewActivity : AppCompatActivity()  {
         setContentView(mainmenuPage.root)
         replaceFragment(HomeMenuPageFragment())
 
-        // The Code for Filter Recycler View
-        mainmenuPage.filterRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        mainmenuPage.filterRecyclerView.adapter = FilterAdapter(FilterGenerator.loadData())
-
         // The Code for Bottom Navigation
         val bottomNavigationView = mainmenuPage.BottomNavigation
 

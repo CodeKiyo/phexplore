@@ -136,6 +136,8 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 Log.d(TAG, "Error getting documents: ", task.exception)
             }
+        }.addOnFailureListener { exception ->
+            println("Error getting documents: $exception")
         }
     }
 

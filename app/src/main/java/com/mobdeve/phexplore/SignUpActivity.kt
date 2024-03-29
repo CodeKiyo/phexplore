@@ -9,6 +9,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.UnderlineSpan
 import android.util.Log
 import android.util.Patterns
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
@@ -17,6 +18,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mobdeve.phexplore.databinding.SignupPageBinding
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -27,6 +29,8 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private lateinit var signupPage: SignupPageBinding
+    private val db = Firebase.firestore
+    private val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
 
     // Variables to determine the state of each input as valid before signing up
     // Should be used as conditions in signing up and moving to the MainMenuView only if are set to true
@@ -317,42 +321,11 @@ class SignUpActivity : AppCompatActivity() {
         signupButton.setOnClickListener{
             if(usernameState && emailState && passwordState && birthdayState) {
                 val username = this.signupPage.signupUsernameInput.text.toString()
+                val password = this.signupPage.signupPasswordInput.text.toString()
+                val email = this.signupPage.signupEmailInput.text.toString()
+                val birthdate = this.signupPage.signupBirthdayDisplay.text.toString()
 
-                val db = Firebase.firestore
-                // Get the User collection reference
-                val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
-
-                val data: MutableMap<String, Any> = HashMap()
-                // Username palang pwede istore
-                data[MyFirestoreReferences.USERNAME_FIELD] = username
-
-                usersRef
-                    .add(data)
-                    .addOnSuccessListener { documentReference ->
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.id)
-                        val i = Intent(this@SignUpActivity, HomeMenuViewActivity::class.java)
-                        i.putExtra(IntentKeys.USERNAME.name, username)
-                        startActivity(i)
-                        finish()
-                    }
-                    .addOnFailureListener { e -> Log.w(TAG, "Error adding document", e) }
-
-                // Should also be where insertion of credentials to Firestore Database are implemented
-                // A document in the registered users will be inserted
-                // And there will be a cloning of the original MainMenu views collection
-                // In which, the registered user will use the cloned collection
-
-                /*
-                val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
-
-                intentToMainMenu.putExtra(
-                    HomeMenuViewActivity.signup_username_input,
-                    signupPage.signupUsernameInput.text.toString()
-                )
-                startActivity(intentToMainMenu)
-                finish()
-                 */
-
+                validateRegister(username, email, birthdate, password)
             }
         }
 
@@ -375,5 +348,110 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(intentToMainMenuViaSkip)
             finish()
         }
+    }
+
+    private fun validateRegister(username: String, email: String, birthdate: String, password: String) {
+        validateEmail(email) { isValid ->
+            if (isValid) {
+                // Email is valid
+                validateUsername(username) { isValid ->
+                    if (isValid) {
+                        // Username is valid
+                        if(validateBirth(birthdate)) {
+                            val data: MutableMap<String, Any> = HashMap()
+                            data[MyFirestoreReferences.USERNAME_FIELD] = username
+                            data[MyFirestoreReferences.PASSWORD_FIELD] = password
+                            data[MyFirestoreReferences.EMAIL_FIELD] = email
+                            data[MyFirestoreReferences.BIRTHDATE_FIELD] = birthdate
+
+                            usersRef
+                                .add(data)
+                                .addOnSuccessListener { documentReference ->
+                                    Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.id)
+                                    val i = Intent(this@SignUpActivity, HomeMenuViewActivity::class.java)
+                                    i.putExtra(IntentKeys.USERNAME.name, username)
+                                    startActivity(i)
+                                    finish()
+                                }
+                                .addOnFailureListener { e -> Log.w(TAG, "Error adding document", e) }
+                        } else {
+                            val builder = AlertDialog.Builder(this)
+                            builder.setMessage("Must be 18 or above.")
+                            builder.setCancelable(true)
+                            val alert = builder.create()
+                            alert.show()
+                        }
+                    } else {
+                        // Username is not valid
+                        val builder = AlertDialog.Builder(this)
+                        builder.setMessage("Username already exists.")
+                        builder.setCancelable(true)
+                        val alert = builder.create()
+                        alert.show()
+                    }
+                }
+            } else {
+                // Email is not valid
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Email already exists.")
+                builder.setCancelable(true)
+                val alert = builder.create()
+                alert.show()
+            }
+        }
+    }
+
+    private fun validateEmail(email: String, onComplete: (Boolean) -> Unit) {
+        val emailQuery = usersRef.whereEqualTo(
+            MyFirestoreReferences.EMAIL_FIELD,
+            email
+        )
+
+        emailQuery.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // If there are no results, email is valid
+                if (task.result.isEmpty) {
+                    onComplete(true)
+                } else { // Otherwise, email is not valid
+                    onComplete(false)
+                }
+            } else {
+                Log.d(TAG, "Error getting documents: ", task.exception)
+                onComplete(false)
+            }
+        }.addOnFailureListener { exception ->
+            println("Error getting documents: $exception")
+            onComplete(false)
+        }
+    }
+
+    private fun validateUsername(username: String, onComplete: (Boolean) -> Unit) {
+        val usernameQuery = usersRef.whereEqualTo(
+            MyFirestoreReferences.EMAIL_FIELD,
+            username
+        )
+
+        usernameQuery.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // If there are no results, email is valid
+                if (task.result.isEmpty) {
+                    onComplete(true)
+                } else { // Otherwise, email is not valid
+                    onComplete(false)
+                }
+            } else {
+                Log.d(TAG, "Error getting documents: ", task.exception)
+                onComplete(false)
+            }
+        }.addOnFailureListener { exception ->
+            println("Error getting documents: $exception")
+            onComplete(false)
+        }
+    }
+
+    private fun validateBirth(birthdate: String): Boolean {
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        val birthYear = birthdate.split("-")
+        return currentYear - birthYear[0].toInt() >= 18
     }
 }

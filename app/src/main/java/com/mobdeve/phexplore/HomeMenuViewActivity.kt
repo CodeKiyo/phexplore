@@ -16,11 +16,10 @@ class HomeMenuViewActivity : AppCompatActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         mainmenuPage = HomemenuPageBinding.inflate(layoutInflater)
-
         setContentView(mainmenuPage.root)
-        replaceFragment(HomeMenuPageFragment())
+        val username = intent.getStringExtra(IntentKeys.USERNAME.name)!!
+        replaceFragment(HomeMenuPageFragment.newInstance(username))
 
         // The Code for Bottom Navigation
         val bottomNavigationView = mainmenuPage.BottomNavigation
@@ -30,14 +29,14 @@ class HomeMenuViewActivity : AppCompatActivity()  {
                 R.id.bottom_home -> {
                     // start activity
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                    replaceFragment(HomeMenuPageFragment())
+                    replaceFragment(HomeMenuPageFragment.newInstance(username))
                     // finish
                     true
                 }
                 R.id.bottom_user -> {
                     // start activity
                     //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                    replaceFragment(UserPageFragment())
+                    replaceFragment(UserPageFragment.newInstance(username))
                     // finish
                     true
                 }

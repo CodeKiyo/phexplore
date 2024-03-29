@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -24,8 +25,16 @@ import java.io.ByteArrayOutputStream
 
 class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
     companion object{
-        const val signup_username_input : String = "SIGNUP_USERNAME_INPUT"
         const val TAG = "HomeMenuFragment"
+        private const val ARG_USERNAME = "username"
+
+        fun newInstance(username: String): HomeMenuPageFragment {
+            val args = Bundle()
+            args.putString(ARG_USERNAME, username)
+            return HomeMenuPageFragment().apply {
+                arguments = args
+            }
+        }
     }
 
     private lateinit var horizontalRecyclerView: RecyclerView
@@ -39,6 +48,12 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.homemenu_fragment, container, false)
+
+        val username = arguments?.getString(ARG_USERNAME)
+
+        var usernameTextView = view.findViewById<TextView>(R.id.username)
+
+        usernameTextView.text = username
 
         horizontalRecyclerView = view.findViewById(R.id.horizontalRecyclerView)
         horizontalRecyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)

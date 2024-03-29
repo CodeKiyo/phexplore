@@ -22,7 +22,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="5dp"
-            android:backgroundTint="#F6A0A3"
+            android:backgroundTint="#D8D8DD"
             android:clickable="false"
             android:elevation="4dp"
             android:foreground="?attr/selectableItemBackground"
@@ -39,7 +39,7 @@
                     android:id="@+id/filter_icon"
                     android:layout_width="50dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/filter_cultour_icon" />
+                    android:src="@drawable/filter_all_icon" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

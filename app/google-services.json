@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "922847983516",
-    "project_id": "mobdeveproject",
-    "storage_bucket": "mobdeveproject.appspot.com"
+    "project_number": "193759497795",
+    "project_id": "newmobdeveproject",
+    "storage_bucket": "newmobdeveproject.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:922847983516:android:4f16695db5638a922f7a59",
+        "mobilesdk_app_id": "1:193759497795:android:7918cd276abc18775a4ef6",
         "android_client_info": {
           "package_name": "com.mobdeve.phexplore"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAI558OgKMTH-gRIZMKGIIjvqRZFIoR47Y"
+          "current_key": "AIzaSyCfZO6QYHOc5abmY-7qPYYEKcVYjn6eO0c"
         }
       ],
       "services": {

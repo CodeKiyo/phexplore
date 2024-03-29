@@ -39,13 +39,25 @@ android {
 }
 
 dependencies {
+    val fragment_version = "1.6.2"
+
+    implementation("androidx.fragment:fragment-ktx:$fragment_version")
+
+    // Firebase Realtime Database
+    implementation ("com.google.firebase:firebase-database-ktx:20.0.4")
+    implementation ("com.firebaseui:firebase-ui-database:8.0.2")
+
     // Cloud Firestore
-    implementation ("com.google.firebase:firebase-firestore-ktx:24.11.0")
+    implementation ("com.google.firebase:firebase-firestore-ktx:24.1.1")
     implementation ("com.firebaseui:firebase-ui-firestore:8.0.2")
 
     // Firebase Auth
-    implementation ("com.google.firebase:firebase-auth-ktx:22.3.1")
+    implementation ("com.google.firebase:firebase-auth-ktx:21.0.3")
     implementation ("com.firebaseui:firebase-ui-auth:8.0.2")
+
+    // Cloud Storage
+    implementation ("com.google.firebase:firebase-storage-ktx:20.0.1")
+    implementation ("com.firebaseui:firebase-ui-storage:8.0.2")
 
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.google.firebase:firebase-analytics")

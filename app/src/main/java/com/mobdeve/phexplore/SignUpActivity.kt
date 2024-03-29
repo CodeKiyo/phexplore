@@ -7,11 +7,14 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.UnderlineSpan
+import android.util.Log
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.mobdeve.phexplore.databinding.SignupPageBinding
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -20,6 +23,7 @@ import java.util.Locale
 class SignUpActivity : AppCompatActivity() {
     companion object{
         const val BACKGROUND_RESOURCE_ID = "BACKGROUND_RESOURCE_ID"
+        const val TAG = "SignUpActivity"
     }
 
     private lateinit var signupPage: SignupPageBinding
@@ -312,12 +316,33 @@ class SignUpActivity : AppCompatActivity() {
 
         signupButton.setOnClickListener{
             if(usernameState && emailState && passwordState && birthdayState) {
+                val username = this.signupPage.signupUsernameInput.text.toString()
+
+                val db = Firebase.firestore
+                // Get the User collection reference
+                val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
+
+                val data: MutableMap<String, Any> = HashMap()
+                // Username palang pwede istore
+                data[MyFirestoreReferences.USERNAME_FIELD] = username
+
+                usersRef
+                    .add(data)
+                    .addOnSuccessListener { documentReference ->
+                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.id)
+                        val i = Intent(this@SignUpActivity, HomeMenuViewActivity::class.java)
+                        i.putExtra(IntentKeys.USERNAME.name, username)
+                        startActivity(i)
+                        finish()
+                    }
+                    .addOnFailureListener { e -> Log.w(TAG, "Error adding document", e) }
 
                 // Should also be where insertion of credentials to Firestore Database are implemented
                 // A document in the registered users will be inserted
                 // And there will be a cloning of the original MainMenu views collection
                 // In which, the registered user will use the cloned collection
 
+                /*
                 val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
 
                 intentToMainMenu.putExtra(
@@ -326,6 +351,8 @@ class SignUpActivity : AppCompatActivity() {
                 )
                 startActivity(intentToMainMenu)
                 finish()
+                 */
+
             }
         }
 

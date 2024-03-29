@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,7 +13,7 @@
         <ImageView
             android:id="@+id/destImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="325dp"
             android:adjustViewBounds="true"
             android:contentDescription="Destination Image"
             android:scaleType="centerCrop"
@@ -20,27 +21,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <ImageView
-            android:id="@+id/bookmarkBtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="-25dp"
-            android:background="@drawable/round_white"
-            android:contentDescription="Bookmark Icon"
-            android:padding="16dp"
-            android:src="@drawable/bookmark_black"
-            android:translationZ="99dp"
-            app:layout_constraintBottom_toTopOf="@+id/horizontalCardView"
-            app:layout_constraintEnd_toEndOf="parent" />
 
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/horizontalCardView"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-20dp"
-            app:cardCornerRadius="20dp"
+            android:layout_marginTop="-35dp"
+            android:background="@drawable/rounded_topleftright_corner_full_white"
+            android:clickable="false"
+            android:contextClickable="false"
+            android:longClickable="false"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/destImage">
@@ -55,26 +45,211 @@
                     android:id="@+id/destName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="30dp"
-                    android:text="Destination Name"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Pinto Art Museum"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/destLocation_Icon"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/homemenu_location_icon1" />
+
+                    <TextView
+                        android:id="@+id/destCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:fontFamily="@font/lato_regular"
+                        android:text="Antipolo, Rizal"
+                        android:textSize="15sp" />
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/destDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="30dp"
-                    android:text=" asd ad asd  " />
+                    android:fontFamily="@font/lato_regular"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    android:textColor="#858484" />
 
-                <TextView
-                    android:id="@+id/destCity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:text=" city  " />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/BookmarkCard"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:backgroundTint="#9ED2F6"
+                            android:clickable="false"
+                            android:elevation="4dp"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:foregroundTint="#606060"
+                            app:cardCornerRadius="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/BookmarkIcon"
+                                    android:layout_width="50dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/details_bookmark_false" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/BookmarkText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/lato_regular"
+                            android:text="Bookmark"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/ShareCard"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:backgroundTint="#1877F2"
+                            android:clickable="false"
+                            android:elevation="4dp"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:foregroundTint="#606060"
+                            app:cardCornerRadius="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center|top"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/ShareIcon"
+                                    android:layout_width="50dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="7dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/details_sharefacebook_icon" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/ShareText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/lato_regular"
+                            android:text="Share"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/LocationCard"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:backgroundTint="#FAFAFA"
+                            android:clickable="false"
+                            android:elevation="4dp"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:foregroundTint="#606060"
+                            app:cardCornerRadius="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/LocationIcon"
+                                    android:layout_width="50dp"
+                                    android:layout_height="30dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@drawable/details_locationgooglemaps_icon" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/LocationText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/lato_regular"
+                            android:text="Location"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

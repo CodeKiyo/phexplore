@@ -18,7 +18,6 @@ class DestinationAdapter(private val data: ArrayList<DestinationModel>, private 
         return DestinationViewHolder(view)
     }
 
-
     override fun onBindViewHolder(holder: DestinationViewHolder, position: Int) {
         holder.bindData(this.data[position])
     }

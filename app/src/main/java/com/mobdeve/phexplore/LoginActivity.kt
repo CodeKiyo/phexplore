@@ -62,16 +62,7 @@ class LoginActivity : AppCompatActivity() {
             loginPage.backgroundLogin.setImageResource(backgroundImage)
         }
 
-        // Error and Validation Mode in username and password for Login
-        // The logic should be implemented inside the loginButton
-        val usernameInputLayout = loginPage.loginUsernameLayout
-        val usernameInput = loginPage.loginUsernameInput
-        val passwordInputLayout = loginPage.loginPasswordLayout
-        val passwordInput = loginPage.loginPasswordInput
-
-
         // Getting the Login Button and going to the Main Menu
-
         this.loginPage.loginButton.setOnClickListener(View.OnClickListener {
             val username = this.loginPage.loginUsernameInput.text.toString()
             val password = this.loginPage.loginPasswordInput.text.toString()
@@ -100,6 +91,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    // Checks if username and password exist in the database
     private fun validateAccount(username: String, password: String) {
         val db = Firebase.firestore
         val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)

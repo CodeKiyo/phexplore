@@ -46,7 +46,6 @@ class FilterViewHolder(itemView: View, private val verticalRecyclerView: Recycle
             println("Error getting documents: $exception")
         }
 
-
         this.itemView.setOnClickListener {
             var filteredData = ArrayList<DestinationModel>()
             destinationsRef.get().addOnSuccessListener { result ->

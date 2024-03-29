@@ -55,6 +55,7 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
 
         usernameTextView.text = username
 
+        // Set up recyclerview layouts
         horizontalRecyclerView = view.findViewById(R.id.horizontalRecyclerView)
         horizontalRecyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
         verticalRecyclerView = view.findViewById(R.id.verticalRecyclerView)
@@ -62,7 +63,7 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
         verticalRecyclerView.isNestedScrollingEnabled = false
         verticalRecyclerView.setHasFixedSize(false)
 
-        //Testing database destination list
+        // Firebase database and data initialization
         val db = Firebase.firestore
         val destinationsRef = db.collection(MyFirestoreReferences.DESTINATIONS_COLLECTION)
         val data = ArrayList<DestinationModel>()
@@ -72,7 +73,7 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
         val destImage = MyFirestoreReferences.DESTIMAGE_FIELD
         val destCategory = MyFirestoreReferences.DESTCATEGORY_FIELD
 
-        // retrieve all documents in the destinations collection
+        // retrieve all documents in the destinations collection to filter
         destinationsRef.get().addOnSuccessListener { result ->
             for (document in result!!.documents) {
                 val newData = DestinationModel(
@@ -90,6 +91,7 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
             println("Error getting documents: $exception")
         }
 
+        // transition to userpage fragment
         view.findViewById<ImageView>(R.id.userDp).setOnClickListener {
             val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.BottomNavigation)
             bottomNav?.selectedItemId = R.id.bottom_user
@@ -99,10 +101,6 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
         filterRecyclerView = view.findViewById(R.id.filterRecyclerView)
         filterRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         filterRecyclerView.adapter = FilterAdapter(FilterGenerator.loadData(),verticalRecyclerView)
-
-        /*
-        this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()
-         */
 
         return view
     }

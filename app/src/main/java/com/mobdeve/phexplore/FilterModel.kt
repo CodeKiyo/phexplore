@@ -5,7 +5,6 @@ class FilterModel(filterName: String, filterImage: Int, filterColor: String) {
         private set
     var filterImage = filterImage
         private set
-
     var filterColor = filterColor
         private set
 }

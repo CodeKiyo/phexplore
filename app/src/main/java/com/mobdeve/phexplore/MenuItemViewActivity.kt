@@ -19,7 +19,6 @@ class MenuItemViewActivity : AppCompatActivity()  {
     }
 
     private lateinit var menuitemPage: MenuitemviewPageBinding
-    private var isLiked = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -31,7 +30,6 @@ class MenuItemViewActivity : AppCompatActivity()  {
         this.menuitemPage.destName.text = intent.getStringExtra(dest_name).toString()
         this.menuitemPage.destDescription.text = intent.getStringExtra(dest_description).toString()
         val imageURL = intent.getStringExtra(dest_image).toString()
-        Log.d("MenuItemViewActivity", imageURL)
         Picasso.get().load(imageURL).into(this.menuitemPage.destImage)
         this.menuitemPage.destCity.text = intent.getStringExtra(dest_city).toString()
     }

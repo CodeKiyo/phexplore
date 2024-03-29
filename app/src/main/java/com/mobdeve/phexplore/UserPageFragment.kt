@@ -32,12 +32,12 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment)  {
     ): View? {
         val view = inflater.inflate(R.layout.user_page_fragment, container, false)
 
+        // Replace username TextView with current logged in username
         val username = arguments?.getString(ARG_USERNAME)
-
         val usernameTextView = view.findViewById<TextView>(R.id.username)
-
         usernameTextView.text = username
 
+        // Display the destinations the user has bookmarked
         favoriteRecyclerView = view.findViewById(R.id.favoriteRecyclerView)
         favoriteRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         favoriteRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),2)

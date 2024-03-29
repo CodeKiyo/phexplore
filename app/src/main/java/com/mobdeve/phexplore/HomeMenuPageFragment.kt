@@ -60,13 +60,13 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
         // retrieve all documents in the destinations collection
         destinationsRef.get().addOnSuccessListener { result ->
             for (document in result!!.documents) {
-                val testData = DestinationModel(
+                val newData = DestinationModel(
                     document.get(destName).toString(),
                     document.get(destDescription).toString(),
                     document.get(destImage).toString(),
                     document.get(destCity).toString(),
                     document.get(destCategory).toString())
-                data.add(testData)
+                data.add(newData)
                 Log.d(TAG, DataGenerator.loadData().size.toString())
             }
             horizontalRecyclerView.adapter = DestinationAdapter(data, 0)

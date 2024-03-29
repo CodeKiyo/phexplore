@@ -32,20 +32,17 @@ class FilterViewHolder(itemView: View, private val verticalRecyclerView: Recycle
             val destCity = MyFirestoreReferences.DESTCITY_FIELD
             val destImage = MyFirestoreReferences.DESTIMAGE_FIELD
             val destCategory = MyFirestoreReferences.DESTCATEGORY_FIELD
-
-
-            // retrieve all documents in the destinations collection
             destinationsRef.get().addOnSuccessListener { result ->
                 for (document in result!!.documents) {
-                    val test = document.get(destCategory).toString()
-                    if(test == this.filter_name.text) {
-                        val testData = DestinationModel(
+                    val condition = document.get(destCategory).toString()
+                    if(condition == this.filter_name.text) {
+                        val newData = DestinationModel(
                             document.get(destName).toString(),
                             document.get(destDescription).toString(),
                             document.get(destImage).toString(),
                             document.get(destCity).toString(),
                             document.get(destCategory).toString())
-                        data.add(testData)
+                        data.add(newData)
                     }
                 }
                 verticalRecyclerView.adapter = DestinationAdapter(data, 1)

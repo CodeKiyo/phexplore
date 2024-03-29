@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import com.squareup.picasso.Picasso
 
 class DestinationViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
     private val name: TextView = itemView.findViewById(R.id.destName)
@@ -15,7 +16,7 @@ class DestinationViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
     private val description: TextView? = itemView.findViewById(R.id.destDescription)
     fun bindData(model: DestinationModel) {
         this.name.text = model.destName
-        this.image.setImageResource(model.destImage)
+        Picasso.get().load(model.destImage).into(this.image);
         this.location.text = model.destCity
         this.description?.text = model.destDescription
         this.itemView.setOnClickListener {

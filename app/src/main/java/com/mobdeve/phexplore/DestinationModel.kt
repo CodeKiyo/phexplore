@@ -1,6 +1,6 @@
 package com.mobdeve.phexplore
 
-class DestinationModel(destName: String, destDescription: String, destImage: Int, destCity: String, destCategory: String) {
+class DestinationModel(destName: String, destDescription: String, destImage: String, destCity: String, destCategory: String) {
     var destName = destName
         private set
     var destImage = destImage

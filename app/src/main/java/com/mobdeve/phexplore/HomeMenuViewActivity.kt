@@ -1,8 +1,10 @@
 package com.mobdeve.phexplore
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.mobdeve.phexplore.databinding.HomemenuPageBinding
@@ -43,6 +45,35 @@ class HomeMenuViewActivity : AppCompatActivity()  {
             val intent = Intent(this, UserPage::class.java)
             startActivity(intent)
         }
+
+        // The Code for Bottom Navigation
+        val bottomNavigationView = mainmenuPage.BottomNavigation
+
+        bottomNavigationView.setOnItemReselectedListener { item ->
+            when (item.itemId) {
+                R.id.bottom_home -> {
+                    // start activity
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    // finish
+                    true
+                }
+                R.id.bottom_user -> {
+                    // start activity
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    // finish
+                    true
+                }
+                R.id.bottom_settings -> {
+                    // start activity
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    // finish
+                    true
+                }
+                else -> false
+            }
+        }
+
+
 
 
     }

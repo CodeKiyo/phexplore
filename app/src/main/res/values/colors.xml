@@ -17,4 +17,7 @@
     <color name="Valid">#00BA00</color>
     <color name="Required">#FF0000</color>
 
+    <!-- Bottom Nav -->
+    <color name="gray">#D2D2D2</color>
+
 </resources>

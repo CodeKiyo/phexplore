@@ -34,14 +34,5 @@ class MenuItemViewActivity : AppCompatActivity()  {
         Log.d("MenuItemViewActivity", imageURL)
         Picasso.get().load(imageURL).into(this.menuitemPage.destImage)
         this.menuitemPage.destCity.text = intent.getStringExtra(dest_city).toString()
-        this.menuitemPage.bookmarkBtn.setOnClickListener {
-            if (this.isLiked) {
-                this.menuitemPage.bookmarkBtn.setImageResource(R.drawable.bookmark_black)
-                this.isLiked = false
-            } else {
-                this.menuitemPage.bookmarkBtn.setImageResource(R.drawable.bookmark_yellow)
-                this.isLiked = true
-            }
-        }
     }
 }

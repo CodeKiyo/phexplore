@@ -83,7 +83,7 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
         // The Code for Filter Recycler View
         filterRecyclerView = view.findViewById(R.id.filterRecyclerView)
         filterRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        filterRecyclerView.adapter = FilterAdapter(FilterGenerator.loadData())
+        filterRecyclerView.adapter = FilterAdapter(FilterGenerator.loadData(),verticalRecyclerView)
 
         /*
         this.mainmenuPage.username.text = intent.getStringExtra(signup_username_input).toString()

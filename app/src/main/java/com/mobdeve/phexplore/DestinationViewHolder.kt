@@ -16,7 +16,7 @@ class DestinationViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
     private val description: TextView? = itemView.findViewById(R.id.destDescription)
     fun bindData(model: DestinationModel) {
         this.name.text = model.destName
-        Picasso.get().load(model.destImage).into(this.image);
+        Picasso.get().load(model.destImage).into(this.image)
         this.location.text = model.destCity
         this.description?.text = model.destDescription
         this.itemView.setOnClickListener {

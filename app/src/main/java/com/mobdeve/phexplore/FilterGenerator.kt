@@ -6,7 +6,7 @@ class FilterGenerator {
         fun loadData(): ArrayList<FilterModel>{
             val data = ArrayList<FilterModel>()
 
-            data.add(FilterModel("All", R.drawable.filter_all_icon, "#DFE0F3"))
+            //data.add(FilterModel("All", R.drawable.filter_all_icon, "#DFE0F3"))
             data.add(FilterModel("LandEats", R.drawable.filter_landeats_icon, "#D2FDC6"))
             data.add(FilterModel("CulTour", R.drawable.filter_cultour_icon, "#F6A0A3"))
             data.add(FilterModel("PastQuests", R.drawable.filter_pastquests_icon, "#C892F8"))

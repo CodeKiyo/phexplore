@@ -2,8 +2,11 @@ package com.mobdeve.phexplore
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.mobdeve.phexplore.databinding.MenuitemviewPageBinding
+import com.squareup.picasso.Picasso
 
 class MenuItemViewActivity : AppCompatActivity()  {
 
@@ -27,7 +30,9 @@ class MenuItemViewActivity : AppCompatActivity()  {
         // Replaces the username with what the user inputs from the Sign Up Page
         this.menuitemPage.destName.text = intent.getStringExtra(dest_name).toString()
         this.menuitemPage.destDescription.text = intent.getStringExtra(dest_description).toString()
-        this.menuitemPage.destImage.setImageResource(intent.getIntExtra(dest_image, 0))
+        val imageURL = intent.getStringExtra(dest_image).toString()
+        Log.d("MenuItemViewActivity", imageURL)
+        Picasso.get().load(imageURL).into(this.menuitemPage.destImage)
         this.menuitemPage.destCity.text = intent.getStringExtra(dest_city).toString()
         this.menuitemPage.bookmarkBtn.setOnClickListener {
             if (this.isLiked) {

@@ -14,7 +14,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.mobdeve.phexplore.databinding.UserPageFragmentBinding
 
-class UserPageFragment : Fragment(R.layout.user_page_fragment)  {
+class UserPageFragment : Fragment(R.layout.user_page_fragment_new)  {
     companion object{
         const val TAG = "UserPageFragment"
         private const val ARG_USERNAME = "username"
@@ -34,7 +34,7 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment)  {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.user_page_fragment, container, false)
+        val view = inflater.inflate(R.layout.user_page_fragment_new, container, false)
 
         // Replace username TextView with current logged in username
         val username = arguments?.getString(ARG_USERNAME)

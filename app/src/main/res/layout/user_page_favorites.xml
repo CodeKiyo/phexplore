@@ -108,7 +108,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="7dp"
                         android:fontFamily="@font/lato_regular"
-                        android:text="ThrillScapes"
+                        android:text="LandEats"
                         android:textColor="#A6A6A5"
                         android:textSize="11sp" />
                 </LinearLayout>

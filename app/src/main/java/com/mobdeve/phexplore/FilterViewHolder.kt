@@ -40,7 +40,6 @@ class FilterViewHolder(itemView: View, private val verticalRecyclerView: Recycle
                     document.get(destCity).toString(),
                     document.get(destCategory).toString())
                 allData.add(newData)
-                Log.d("FilterViewHolder if", allData.size.toString())
             }
         }.addOnFailureListener { exception ->
             println("Error getting documents: $exception")

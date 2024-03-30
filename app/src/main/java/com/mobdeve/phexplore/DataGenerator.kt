@@ -1,6 +1,7 @@
 package com.mobdeve.phexplore
 
 class DataGenerator {
+    /*
     companion object {
         fun loadData(): ArrayList<DestinationModel> {
             val data = ArrayList<DestinationModel>()
@@ -30,4 +31,6 @@ class DataGenerator {
             return data
         }
     }
+
+     */
 }

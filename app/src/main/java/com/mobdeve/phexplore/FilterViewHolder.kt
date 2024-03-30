@@ -38,7 +38,8 @@ class FilterViewHolder(itemView: View, private val verticalRecyclerView: Recycle
                     document.get(destDescription).toString(),
                     document.get(destImage).toString(),
                     document.get(destCity).toString(),
-                    document.get(destCategory).toString())
+                    document.get(destCategory).toString(),
+                    0)
                 allData.add(newData)
             }
         }.addOnFailureListener { exception ->
@@ -56,7 +57,8 @@ class FilterViewHolder(itemView: View, private val verticalRecyclerView: Recycle
                             document.get(destDescription).toString(),
                             document.get(destImage).toString(),
                             document.get(destCity).toString(),
-                            document.get(destCategory).toString())
+                            document.get(destCategory).toString(),
+                            0)
                         filteredData.add(newData)
                     } else if(this.filter_name.text == "All") {
                         filteredData = allData

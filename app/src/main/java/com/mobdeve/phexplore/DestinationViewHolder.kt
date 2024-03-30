@@ -21,16 +21,17 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
     private val category: TextView? = itemView.findViewById(R.id.destCategory)
     private val bookmarkButton: CardView? = itemView.findViewById(R.id.verticalBookmarkStateCard)
     private val bookmarkIcon: ImageView? = itemView.findViewById(R.id.BookmarkState)
-
-    private var clicked = false
+    private val bookmarkAmount: TextView? = itemView.findViewById(R.id.bookmarkAmount)
     fun bindData(model: DestinationModel) {
         this.name.text = model.destName
         Picasso.get().load(model.destImage).into(this.image)
         this.location.text = model.destCity
         this.description?.text = model.destDescription
         this.category?.text = model.destCategory
+        this.bookmarkAmount?.text = model.numOfBookmarks.toString()
 
         this.itemView.setOnClickListener {
+            println("clicked!")
             val intentToViewItem = Intent(itemView.context, MenuItemViewActivity::class.java)
             intentToViewItem.putExtra("DEST_NAME", model.destName)
             intentToViewItem.putExtra("DEST_IMAGE", model.destImage)
@@ -41,8 +42,11 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
 
         val db = Firebase.firestore
         val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
+        val destinationsRef = db.collection(MyFirestoreReferences.DESTINATIONS_COLLECTION)
         val bookmarks = MyFirestoreReferences.BOOKMARKS_FIELD
         var userBookmarkNames = ArrayList<String>()
+        var clicked = false
+
         usersRef
             .whereEqualTo(MyFirestoreReferences.USERNAME_FIELD, username)
             .get()
@@ -55,6 +59,7 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
                         for (element in userBookmarkNames) {
                             if(element == this.name.text) {
                                 this.bookmarkIcon?.setImageResource(R.drawable.homemenu_bookmark_true)
+                                clicked = true
                             }
                         }
                     }
@@ -88,6 +93,17 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
                                         MyFirestoreReferences.BOOKMARKS_FIELD,
                                         FieldValue.arrayUnion(this.name.text)
                                     )
+                                    destinationsRef
+                                        .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
+                                        .get()
+                                        .addOnSuccessListener { documents ->
+                                            for (document in documents) {
+                                                document.reference.update(
+                                                    MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
+                                                    document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() + 1
+                                                )
+                                            }
+                                        }
                                 }
 
                             }
@@ -119,6 +135,17 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
                                         MyFirestoreReferences.BOOKMARKS_FIELD,
                                         FieldValue.arrayRemove(this.name.text)
                                     )
+                                    destinationsRef
+                                        .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
+                                        .get()
+                                        .addOnSuccessListener { documents ->
+                                            for (document in documents) {
+                                                document.reference.update(
+                                                    MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
+                                                    document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() - 1
+                                                )
+                                            }
+                                        }
                                 }
 
                             }

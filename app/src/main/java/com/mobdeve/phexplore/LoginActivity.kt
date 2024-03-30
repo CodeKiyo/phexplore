@@ -85,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
         loginSkip.setOnClickListener{
 
             val intentToMainMenuViaSkip = Intent(this, HomeMenuViewActivity::class.java)
-
+            intentToMainMenuViaSkip.putExtra(IntentKeys.USERNAME.name, "Guest")
             startActivity(intentToMainMenuViaSkip)
             finish()
         }

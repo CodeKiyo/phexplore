@@ -13,4 +13,5 @@ object MyFirestoreReferences {
     const val DESTDESCRIPTION_FIELD = "destDescription"
     const val DESTCITY_FIELD = "destCity"
     const val DESTCATEGORY_FIELD = "destCategory"
+    const val BOOKMARKAMOUNT_FIELD = "numOfBookmarks"
 }

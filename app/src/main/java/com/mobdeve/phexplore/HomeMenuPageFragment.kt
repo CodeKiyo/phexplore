@@ -64,6 +64,7 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
         val destCity = MyFirestoreReferences.DESTCITY_FIELD
         val destImage = MyFirestoreReferences.DESTIMAGE_FIELD
         val destCategory = MyFirestoreReferences.DESTCATEGORY_FIELD
+        val bookmarkAmount = MyFirestoreReferences.BOOKMARKAMOUNT_FIELD
 
         // retrieve all documents in the destinations collection to display
         destinationsRef.get().addOnSuccessListener { result ->
@@ -73,11 +74,32 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
                     document.get(destDescription).toString(),
                     document.get(destImage).toString(),
                     document.get(destCity).toString(),
-                    document.get(destCategory).toString())
+                    document.get(destCategory).toString(),
+                    document.get(bookmarkAmount).toString().toInt())
                 data.add(newData)
             }
-            horizontalRecyclerView.adapter = DestinationAdapter(data, 0, username.toString())
             verticalRecyclerView.adapter = DestinationAdapter(data, 1, username.toString())
+        }.addOnFailureListener { exception ->
+            println("Error getting documents: $exception")
+        }
+
+
+        val recommendedData = ArrayList<DestinationModel>()
+
+        destinationsRef.get().addOnSuccessListener { result ->
+            for (document in result!!.documents) {
+                if(document.get(bookmarkAmount).toString().toInt() >= 4) {
+                    val newData = DestinationModel(
+                        document.get(destName).toString(),
+                        document.get(destDescription).toString(),
+                        document.get(destImage).toString(),
+                        document.get(destCity).toString(),
+                        document.get(destCategory).toString(),
+                        document.get(bookmarkAmount).toString().toInt())
+                    recommendedData.add(newData)
+                }
+            }
+            horizontalRecyclerView.adapter = DestinationAdapter(recommendedData, 0, username.toString())
         }.addOnFailureListener { exception ->
             println("Error getting documents: $exception")
         }

@@ -363,6 +363,7 @@ class SignUpActivity : AppCompatActivity() {
                             data[MyFirestoreReferences.PASSWORD_FIELD] = password
                             data[MyFirestoreReferences.EMAIL_FIELD] = email
                             data[MyFirestoreReferences.BIRTHDATE_FIELD] = birthdate
+                            data[MyFirestoreReferences.BOOKMARKS_FIELD] = ArrayList<String>()
 
                             usersRef
                                 .add(data)
@@ -433,10 +434,10 @@ class SignUpActivity : AppCompatActivity() {
 
         usernameQuery.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                // If there are no results, email is valid
+                // If there are no results, username is valid
                 if (task.result.isEmpty) {
                     onComplete(true)
-                } else { // Otherwise, email is not valid
+                } else { // Otherwise, username is not valid
                     onComplete(false)
                 }
             } else {

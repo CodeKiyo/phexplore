@@ -51,7 +51,7 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
 
         val username = arguments?.getString(ARG_USERNAME)
 
-        var usernameTextView = view.findViewById<TextView>(R.id.username)
+        val usernameTextView = view.findViewById<TextView>(R.id.username)
 
         usernameTextView.text = username
 
@@ -84,11 +84,16 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
                     document.get(destCategory).toString())
                 data.add(newData)
             }
-            horizontalRecyclerView.adapter = DestinationAdapter(data, 0)
-            verticalRecyclerView.adapter = DestinationAdapter(data, 1)
+            horizontalRecyclerView.adapter = DestinationAdapter(data, 0, username.toString())
+            verticalRecyclerView.adapter = DestinationAdapter(data, 1, username.toString())
         }.addOnFailureListener { exception ->
             println("Error getting documents: $exception")
         }
+
+
+
+
+
 
         // transition to userpage fragment
         view.findViewById<ImageView>(R.id.userDp).setOnClickListener {
@@ -99,7 +104,7 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
         // The Code for Filter Recycler View
         filterRecyclerView = view.findViewById(R.id.filterRecyclerView)
         filterRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        filterRecyclerView.adapter = FilterAdapter(FilterGenerator.loadData(),verticalRecyclerView)
+        filterRecyclerView.adapter = FilterAdapter(FilterGenerator.loadData(),verticalRecyclerView, username.toString())
 
         return view
     }

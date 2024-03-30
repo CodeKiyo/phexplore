@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class FilterViewHolder(itemView: View, private val verticalRecyclerView: RecyclerView): RecyclerView.ViewHolder(itemView) {
+class FilterViewHolder(itemView: View, private val verticalRecyclerView: RecyclerView, private val username: String): RecyclerView.ViewHolder(itemView) {
     private val filter_name: TextView = itemView.findViewById(R.id.filter_name)
     private val filter_image: ImageView = itemView.findViewById(R.id.filter_icon)
     private val filter_cardcolor: CardView = itemView.findViewById(R.id.filterCardView)
@@ -60,11 +60,11 @@ class FilterViewHolder(itemView: View, private val verticalRecyclerView: Recycle
                         filteredData.add(newData)
                     } else if(this.filter_name.text == "All") {
                         filteredData = allData
-                        verticalRecyclerView.adapter = DestinationAdapter(filteredData, 1)
+                        verticalRecyclerView.adapter = DestinationAdapter(filteredData, 1, username)
                         return@addOnSuccessListener
                     }
                 }
-                verticalRecyclerView.adapter = DestinationAdapter(filteredData, 1)
+                verticalRecyclerView.adapter = DestinationAdapter(filteredData, 1, username)
             }.addOnFailureListener { exception ->
                 println("Error getting documents: $exception")
             }

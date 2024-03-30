@@ -81,7 +81,7 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment)  {
                                             document.get(destCategory).toString())
                                         userBookmarks.add(newData)
                                     }
-                                    favoriteRecyclerView.adapter = DestinationAdapter(userBookmarks, 2)
+                                    favoriteRecyclerView.adapter = DestinationAdapter(userBookmarks, 2, username.toString())
                                     return@addOnSuccessListener
                                 }
                         }

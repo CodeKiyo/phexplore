@@ -53,7 +53,7 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:id="@+id/verticalBookmarkState"
+                            android:id="@+id/BookmarkState"
                             android:layout_width="22dp"
                             android:layout_height="22dp"
                             android:layout_gravity="center"

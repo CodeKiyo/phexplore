@@ -45,21 +45,14 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment)  {
         favoriteRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         // Display the destinations the user has bookmarked
-        // Firebase database and data initialization
         val db = Firebase.firestore
         val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
-        //var userBookmarkNames = List()
-        val userBookmarksDestinations = ArrayList<DestinationModel>()
         val destName = MyFirestoreReferences.DESTNAME_FIELD
         val destDescription = MyFirestoreReferences.DESTDESCRIPTION_FIELD
         val destCity = MyFirestoreReferences.DESTCITY_FIELD
         val destImage = MyFirestoreReferences.DESTIMAGE_FIELD
         val destCategory = MyFirestoreReferences.DESTCATEGORY_FIELD
         val bookmarks = MyFirestoreReferences.BOOKMARKS_FIELD
-
-        // retrieve all documents in the destinations collection to filter
-        //val data = HashMap<String, Any>()
-        val docRef = db.collection("myCollection").document("myDocument")
 
         var userBookmarkNames = ArrayList<String>()
         var userBookmarks = ArrayList<DestinationModel>()
@@ -74,7 +67,6 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment)  {
                     if (data != null) {
                         // Add all elements of data to dataArray
                         userBookmarkNames.addAll(data)
-
                         for (element in userBookmarkNames) {
                             destinationsRef
                                 .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, element)
@@ -93,46 +85,14 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment)  {
                                     return@addOnSuccessListener
                                 }
                         }
-                    } else {
-                        println("Document does not contain dataArray field or it's not an ArrayList")
                     }
                 }
             }
             .addOnFailureListener { exception ->
                 println("Error getting documents: $exception")
             }
-
-        /*
-        val destinationsRef = db.collection(MyFirestoreReferences.DESTINATIONS_COLLECTION)
-
-        destinationsRef.get().addOnSuccessListener { result ->
-            for (document in result!!.documents) {
-                val condition = document.get(destName).toString()
-                for(item in userBookmarkNames) {
-                    if(item == condition) {
-                        val newData = DestinationModel(
-                            document.get(destName).toString(),
-                            document.get(destDescription).toString(),
-                            document.get(destImage).toString(),
-                            document.get(destCity).toString(),
-                            document.get(destCategory).toString())
-                        userBookmarksDestinations.add(newData)
-                    }
-                }
-            }
-            favoriteRecyclerView.adapter = DestinationAdapter(userBookmarksDestinations, 1)
-        }.addOnFailureListener { exception ->
-            println("Error getting documents: $exception")
-        }
-
-         */
-
         favoriteRecyclerView = view.findViewById(R.id.favoriteRecyclerView)
-        favoriteRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        //favoriteRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         return view
-    }
-
-    private fun getBookmarkedArray(username: String, array: ArrayList<String>) {
-
     }
 }

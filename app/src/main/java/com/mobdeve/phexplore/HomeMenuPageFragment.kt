@@ -1,10 +1,6 @@
 package com.mobdeve.phexplore
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,16 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.io.ByteArrayOutputStream
 
 class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
     companion object{
@@ -96,7 +88,7 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
 
 
         // transition to userpage fragment
-        view.findViewById<ImageView>(R.id.userDp).setOnClickListener {
+        view.findViewById<ImageView>(R.id.user_dp).setOnClickListener {
             val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.BottomNavigation)
             bottomNav?.selectedItemId = R.id.bottom_user
         }

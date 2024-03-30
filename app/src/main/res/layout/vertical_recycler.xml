@@ -65,8 +65,8 @@
                         android:id="@+id/destImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:cropToPadding="true"
+                        android:adjustViewBounds="false"
+                        android:cropToPadding="false"
                         android:scaleType="centerCrop"
                         tools:srcCompat="@drawable/destination_intramuros_300x200" />
 

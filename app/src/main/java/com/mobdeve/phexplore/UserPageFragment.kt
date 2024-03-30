@@ -73,11 +73,13 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment_new)  {
                                 .get()
                                 .addOnSuccessListener { documents ->
                                     for (document in documents) {
+                                        val cutText = document.get(destCity).toString()
+                                        val newCutText = cutText.split(", ")
                                         val newData = DestinationModel(
                                             document.get(destName).toString(),
                                             document.get(destDescription).toString(),
                                             document.get(destImage).toString(),
-                                            document.get(destCity).toString(),
+                                            newCutText[0],
                                             document.get(destCategory).toString())
                                         userBookmarks.add(newData)
                                     }

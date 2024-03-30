@@ -65,7 +65,7 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
         val destImage = MyFirestoreReferences.DESTIMAGE_FIELD
         val destCategory = MyFirestoreReferences.DESTCATEGORY_FIELD
 
-        // retrieve all documents in the destinations collection to filter
+        // retrieve all documents in the destinations collection to display
         destinationsRef.get().addOnSuccessListener { result ->
             for (document in result!!.documents) {
                 val newData = DestinationModel(
@@ -75,7 +75,6 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
                     document.get(destCity).toString(),
                     document.get(destCategory).toString())
                 data.add(newData)
-                Log.d(TAG, DataGenerator.loadData().size.toString())
             }
             horizontalRecyclerView.adapter = DestinationAdapter(data, 0)
             verticalRecyclerView.adapter = DestinationAdapter(data, 1)

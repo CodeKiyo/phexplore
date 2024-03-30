@@ -150,10 +150,29 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginSuccess(username: String) {
-        val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
-        intentToMainMenu.putExtra(IntentKeys.USERNAME.name, username)
-        intentToMainMenu.putExtra(signup_username_input, username)
-        startActivity(intentToMainMenu)
-        finish()
+
+        val db = Firebase.firestore
+        val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
+
+        usersRef.whereEqualTo(MyFirestoreReferences.USERNAME_FIELD, username)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    // Retrieve the document ID
+                    val documentId = document.id
+                    val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
+                    intentToMainMenu.putExtra(IntentKeys.USERNAME.name, username)
+                    intentToMainMenu.putExtra(IntentKeys.DOCUMENTID.name, documentId)
+                    intentToMainMenu.putExtra(signup_username_input, username)
+                    Log.d(TAG, documentId)
+                    startActivity(intentToMainMenu)
+                    finish()
+                }
+            }.addOnFailureListener { exception ->
+                // Handle any errors
+                println("Error getting documents: $exception")
+            }
+
+
     }
 }

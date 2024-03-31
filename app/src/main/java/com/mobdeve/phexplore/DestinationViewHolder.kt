@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
@@ -62,62 +63,70 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
             }
 
         this.bookmarkButton?.setOnClickListener{
-            if(clicked == false) {
-                clicked = true
-                this.bookmarkIcon?.setImageResource(R.drawable.homemenu_bookmark_true)
-                usersRef
-                    .whereEqualTo(MyFirestoreReferences.USERNAME_FIELD, username)
-                    .get()
-                    .addOnSuccessListener { documents ->
-                        for (document in documents) {
-                            document.reference.update(
-                                MyFirestoreReferences.BOOKMARKS_FIELD,
-                                FieldValue.arrayUnion(this.name.text)
-                            )
-                            destinationsRef
-                                .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
-                                .get()
-                                .addOnSuccessListener { documents ->
-                                    for (document in documents) {
-                                        document.reference.update(
-                                            MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
-                                            document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() + 1
-                                        )
+            if(isValidUser(username)) {
+                if(clicked == false) {
+                    clicked = true
+                    this.bookmarkIcon?.setImageResource(R.drawable.homemenu_bookmark_true)
+                    usersRef
+                        .whereEqualTo(MyFirestoreReferences.USERNAME_FIELD, username)
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            for (document in documents) {
+                                document.reference.update(
+                                    MyFirestoreReferences.BOOKMARKS_FIELD,
+                                    FieldValue.arrayUnion(this.name.text)
+                                )
+                                destinationsRef
+                                    .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
+                                    .get()
+                                    .addOnSuccessListener { documents ->
+                                        for (document in documents) {
+                                            document.reference.update(
+                                                MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
+                                                document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() + 1
+                                            )
+                                        }
                                     }
-                                }
+                            }
                         }
-                    }
-                    .addOnFailureListener { exception ->
-                        println("Error getting documents: $exception")
-                    }
+                        .addOnFailureListener { exception ->
+                            println("Error getting documents: $exception")
+                        }
+                } else {
+                    clicked = false
+                    this.bookmarkIcon?.setImageResource(R.drawable.homemenu_bookmark_false)
+                    usersRef
+                        .whereEqualTo(MyFirestoreReferences.USERNAME_FIELD, username)
+                        .get()
+                        .addOnSuccessListener { documents ->
+                            for (document in documents) {
+                                document.reference.update(
+                                    MyFirestoreReferences.BOOKMARKS_FIELD,
+                                    FieldValue.arrayRemove(this.name.text)
+                                )
+                                destinationsRef
+                                    .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
+                                    .get()
+                                    .addOnSuccessListener { documents ->
+                                        for (document in documents) {
+                                            document.reference.update(
+                                                MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
+                                                document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() - 1
+                                            )
+                                        }
+                                    }
+                            }
+                        }
+                        .addOnFailureListener { exception ->
+                            println("Error getting documents: $exception")
+                        }
+                }
             } else {
-                clicked = false
-                this.bookmarkIcon?.setImageResource(R.drawable.homemenu_bookmark_false)
-                usersRef
-                    .whereEqualTo(MyFirestoreReferences.USERNAME_FIELD, username)
-                    .get()
-                    .addOnSuccessListener { documents ->
-                        for (document in documents) {
-                            document.reference.update(
-                                MyFirestoreReferences.BOOKMARKS_FIELD,
-                                FieldValue.arrayRemove(this.name.text)
-                            )
-                            destinationsRef
-                                .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
-                                .get()
-                                .addOnSuccessListener { documents ->
-                                    for (document in documents) {
-                                        document.reference.update(
-                                            MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
-                                            document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() - 1
-                                        )
-                                    }
-                                }
-                        }
-                    }
-                    .addOnFailureListener { exception ->
-                        println("Error getting documents: $exception")
-                    }
+                val builder = AlertDialog.Builder(itemView.context)
+                builder.setMessage("You need to be logged in to bookmark.")
+                builder.setCancelable(true)
+                val alert = builder.create()
+                alert.show()
             }
         }
 
@@ -135,5 +144,12 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
             intentToViewItem.putExtra("username", username)
             (itemView.context as? Activity)?.startActivity(intentToViewItem, null)
         }
+    }
+
+    private fun isValidUser(username: String): Boolean {
+        if(username != "Guest")
+            return true
+        else
+            return false
     }
 }

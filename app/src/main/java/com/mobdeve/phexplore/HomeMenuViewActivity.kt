@@ -6,13 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.mobdeve.phexplore.databinding.HomemenuPageBinding
 class HomeMenuViewActivity : AppCompatActivity()  {
-    companion object{
-        const val signup_username_input : String = "SIGNUP_USERNAME_INPUT"
-    }
-
     private lateinit var mainmenuPage: HomemenuPageBinding
-    private lateinit var likedLocations:ArrayList<String>
-    private lateinit var likedImages:ArrayList<Int>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

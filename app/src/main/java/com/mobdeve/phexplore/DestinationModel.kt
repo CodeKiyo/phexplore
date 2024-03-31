@@ -6,7 +6,6 @@ class DestinationModel(destName: String, destDescription: String, destImage: Str
         private set
     var destImage = destImage
         private set
-    var isLiked = false
     var destDescription = destDescription
         private set
     var destCity = destCity

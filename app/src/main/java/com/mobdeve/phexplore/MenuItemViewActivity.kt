@@ -131,22 +131,7 @@ class MenuItemViewActivity : AppCompatActivity()  {
                     }
             }
         }
-
-
         menuitemPage.ShareCard.setOnClickListener {
-
-            // Share to Facebook
-            /*
-            val image = BitmapFactory.decodeResource(resources, R.drawable.intro_img1)
-
-            val photo: SharePhoto = SharePhoto.Builder()
-                .setBitmap(image)
-                .build()
-
-            val content: SharePhotoContent = SharePhotoContent.Builder()
-                .addPhoto(photo)
-                .build()
-            */
             val content: ShareLinkContent = ShareLinkContent.Builder()
                 .setContentUrl(Uri.parse(imageURL))
                 .setQuote("Check out " + menuitemPage.destName.text.toString() + " in " + menuitemPage.destCity.text.toString() + "!")

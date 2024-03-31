@@ -162,7 +162,6 @@ class LoginActivity : AppCompatActivity() {
                     val documentId = document.id
                     val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
                     intentToMainMenu.putExtra(IntentKeys.USERNAME.name, username)
-                    intentToMainMenu.putExtra(IntentKeys.DOCUMENTID.name, documentId)
                     intentToMainMenu.putExtra(signup_username_input, username)
                     Log.d(TAG, documentId)
                     startActivity(intentToMainMenu)

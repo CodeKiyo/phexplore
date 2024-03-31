@@ -1,19 +1,15 @@
 package com.mobdeve.phexplore
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.mobdeve.phexplore.databinding.UserPageFragmentBinding
 
 class UserPageFragment : Fragment(R.layout.user_page_fragment_new)  {
     companion object{
@@ -40,14 +36,14 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment_new)  {
         // Replace username TextView with current logged in username
         val username = arguments?.getString(ARG_USERNAME)
         val usernameTextView = view.findViewById<TextView>(R.id.username)
+        val guestText = view.findViewById<TextView>(R.id.guestText)
+        val favoriteCount = view.findViewById<TextView>(R.id.user_favorites_count)
         usernameTextView.text = username
 
         favoriteRecyclerView = view.findViewById(R.id.favoriteRecyclerView)
         favoriteRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
 
         // Display the destinations the user has bookmarked
-
-
         if(username != "Guest") {
             val db = Firebase.firestore
             val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
@@ -57,8 +53,6 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment_new)  {
             val destImage = MyFirestoreReferences.DESTIMAGE_FIELD
             val destCategory = MyFirestoreReferences.DESTCATEGORY_FIELD
             val bookmarks = MyFirestoreReferences.BOOKMARKS_FIELD
-            val latitude = MyFirestoreReferences.BOOKMARKS_FIELD
-            val longitude = MyFirestoreReferences.BOOKMARKS_FIELD
 
             var userBookmarkNames = ArrayList<String>()
             var userBookmarks = ArrayList<DestinationModel>()
@@ -94,6 +88,7 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment_new)  {
                                             userBookmarks.add(newData)
                                         }
                                         favoriteRecyclerView.adapter = DestinationAdapter(userBookmarks, 2, username.toString())
+                                        favoriteCount.text = userBookmarks.size.toString()
                                         return@addOnSuccessListener
                                     }
                             }
@@ -104,12 +99,9 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment_new)  {
                     println("Error getting documents: $exception")
                 }
         } else {
-            favoriteRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-            // Set the adapters for each RecyclerView
-            //favoriteRecyclerView.adapter = DestinationAdapter(DataGenerator.loadData(),2, username)
+            favoriteRecyclerView.visibility = View.GONE
+            guestText.visibility = View.VISIBLE
         }
-
-        //favoriteRecyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         return view
     }
 }

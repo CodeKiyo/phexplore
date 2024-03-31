@@ -108,11 +108,6 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
             println("Error getting documents: $exception")
         }
 
-
-
-
-
-
         // transition to userpage fragment
         view.findViewById<ImageView>(R.id.user_dp).setOnClickListener {
             val bottomNav = activity?.findViewById<BottomNavigationView>(R.id.BottomNavigation)
@@ -126,4 +121,66 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
 
         return view
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onResume() {
+        super.onResume()
+        println("resumed!")
+
+        val destName = MyFirestoreReferences.DESTNAME_FIELD
+        val destDescription = MyFirestoreReferences.DESTDESCRIPTION_FIELD
+        val destCity = MyFirestoreReferences.DESTCITY_FIELD
+        val destImage = MyFirestoreReferences.DESTIMAGE_FIELD
+        val destCategory = MyFirestoreReferences.DESTCATEGORY_FIELD
+        val bookmarkAmount = MyFirestoreReferences.BOOKMARKAMOUNT_FIELD
+
+        // Update verticalRecyclerView
+        val db = Firebase.firestore
+        val destinationsRef = db.collection(MyFirestoreReferences.DESTINATIONS_COLLECTION)
+        val data = ArrayList<DestinationModel>()
+
+        destinationsRef.get().addOnSuccessListener { result ->
+            for (document in result!!.documents) {
+                val newData = DestinationModel(
+                    document.get(destName).toString(),
+                    document.get(destDescription).toString(),
+                    document.get(destImage).toString(),
+                    document.get(destCity).toString(),
+                    document.get(destCategory).toString(),
+                    document.get(bookmarkAmount).toString().toInt(),
+                    "",
+                    "")
+                data.add(newData)
+            }
+            verticalRecyclerView.adapter = DestinationAdapter(data, 1, arguments?.getString(ARG_USERNAME).toString())
+            verticalRecyclerView.adapter?.notifyDataSetChanged()
+        }.addOnFailureListener { exception ->
+            println("Error getting documents: $exception")
+        }
+
+        // Update horizontalRecyclerView
+        val recommendedData = ArrayList<DestinationModel>()
+
+        destinationsRef.get().addOnSuccessListener { result ->
+            for (document in result!!.documents) {
+                if (document.get(bookmarkAmount).toString().toInt() >= 4) {
+                    val newData = DestinationModel(
+                        document.get(destName).toString(),
+                        document.get(destDescription).toString(),
+                        document.get(destImage).toString(),
+                        document.get(destCity).toString(),
+                        document.get(destCategory).toString(),
+                        document.get(bookmarkAmount).toString().toInt(),
+                        "",
+                        "")
+                    recommendedData.add(newData)
+                }
+            }
+            horizontalRecyclerView.adapter = DestinationAdapter(recommendedData, 0, arguments?.getString(ARG_USERNAME).toString())
+            horizontalRecyclerView.adapter?.notifyDataSetChanged()
+        }.addOnFailureListener { exception ->
+            println("Error getting documents: $exception")
+        }
+    }
+
 }

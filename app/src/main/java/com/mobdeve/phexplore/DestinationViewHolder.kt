@@ -30,15 +30,6 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
         this.category?.text = model.destCategory
         this.bookmarkAmount?.text = model.numOfBookmarks.toString()
 
-        this.itemView.setOnClickListener {
-            println("clicked!")
-            val intentToViewItem = Intent(itemView.context, MenuItemViewActivity::class.java)
-            intentToViewItem.putExtra("DEST_NAME", model.destName)
-            intentToViewItem.putExtra("DEST_IMAGE", model.destImage)
-            intentToViewItem.putExtra("DEST_CITY", model.destCity)
-            intentToViewItem.putExtra("DEST_DESCRIPTION", model.destDescription)
-            (itemView.context as? Activity)?.startActivity(intentToViewItem, null)
-        }
 
         val db = Firebase.firestore
         val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
@@ -60,6 +51,7 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
                             if(element == this.name.text) {
                                 this.bookmarkIcon?.setImageResource(R.drawable.homemenu_bookmark_true)
                                 clicked = true
+                                return@addOnSuccessListener
                             }
                         }
                     }
@@ -78,35 +70,21 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
                     .get()
                     .addOnSuccessListener { documents ->
                         for (document in documents) {
-                            val data = document.get(bookmarks) as? ArrayList<String>
-                            if (data != null) {
-                                // Add all elements of data to dataArray
-                                userBookmarkNames.addAll(data)
-                                var found = false
-                                for (element in userBookmarkNames) {
-                                    if(element == this.name.text) {
-                                        found = true
+                            document.reference.update(
+                                MyFirestoreReferences.BOOKMARKS_FIELD,
+                                FieldValue.arrayUnion(this.name.text)
+                            )
+                            destinationsRef
+                                .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
+                                .get()
+                                .addOnSuccessListener { documents ->
+                                    for (document in documents) {
+                                        document.reference.update(
+                                            MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
+                                            document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() + 1
+                                        )
                                     }
                                 }
-                                if(found == false) {
-                                    document.reference.update(
-                                        MyFirestoreReferences.BOOKMARKS_FIELD,
-                                        FieldValue.arrayUnion(this.name.text)
-                                    )
-                                    destinationsRef
-                                        .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
-                                        .get()
-                                        .addOnSuccessListener { documents ->
-                                            for (document in documents) {
-                                                document.reference.update(
-                                                    MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
-                                                    document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() + 1
-                                                )
-                                            }
-                                        }
-                                }
-
-                            }
                         }
                     }
                     .addOnFailureListener { exception ->
@@ -120,41 +98,42 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
                     .get()
                     .addOnSuccessListener { documents ->
                         for (document in documents) {
-                            val data = document.get(bookmarks) as? ArrayList<String>
-                            if (data != null) {
-                                // Add all elements of data to dataArray
-                                userBookmarkNames.addAll(data)
-                                var found = false
-                                for (element in userBookmarkNames) {
-                                    if(element == this.name.text) {
-                                        found = true
+                            document.reference.update(
+                                MyFirestoreReferences.BOOKMARKS_FIELD,
+                                FieldValue.arrayRemove(this.name.text)
+                            )
+                            destinationsRef
+                                .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
+                                .get()
+                                .addOnSuccessListener { documents ->
+                                    for (document in documents) {
+                                        document.reference.update(
+                                            MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
+                                            document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() - 1
+                                        )
                                     }
                                 }
-                                if(found == true) {
-                                    document.reference.update(
-                                        MyFirestoreReferences.BOOKMARKS_FIELD,
-                                        FieldValue.arrayRemove(this.name.text)
-                                    )
-                                    destinationsRef
-                                        .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
-                                        .get()
-                                        .addOnSuccessListener { documents ->
-                                            for (document in documents) {
-                                                document.reference.update(
-                                                    MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
-                                                    document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() - 1
-                                                )
-                                            }
-                                        }
-                                }
-
-                            }
                         }
                     }
                     .addOnFailureListener { exception ->
                         println("Error getting documents: $exception")
                     }
             }
+        }
+
+        this.itemView.setOnClickListener {
+            val intentToViewItem = Intent(itemView.context, MenuItemViewActivity::class.java)
+            intentToViewItem.putExtra("DEST_NAME", model.destName)
+            intentToViewItem.putExtra("DEST_IMAGE", model.destImage)
+            intentToViewItem.putExtra("DEST_CITY", model.destCity)
+            intentToViewItem.putExtra("DEST_DESCRIPTION", model.destDescription)
+            if(clicked == true) {
+                intentToViewItem.putExtra("isBookmarked", true)
+            } else {
+                intentToViewItem.putExtra("isBookmarked", false)
+            }
+            intentToViewItem.putExtra("username", username)
+            (itemView.context as? Activity)?.startActivity(intentToViewItem, null)
         }
     }
 }

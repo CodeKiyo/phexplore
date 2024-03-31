@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.facebook.FacebookSdk
 import com.facebook.share.model.ShareLinkContent
 import com.facebook.share.widget.ShareDialog
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.mobdeve.phexplore.databinding.MenuitemviewPageBinding
 import com.squareup.picasso.Picasso
 
@@ -17,6 +20,8 @@ class MenuItemViewActivity : AppCompatActivity()  {
         const val dest_description : String = "DEST_DESCRIPTION"
         const val dest_image : String = "DEST_IMAGE"
         const val dest_city : String = "DEST_CITY"
+        const val isBookmarked : String = "isBookmarked"
+        const val username : String = "username"
 
     }
 
@@ -33,6 +38,16 @@ class MenuItemViewActivity : AppCompatActivity()  {
         this.menuitemPage.destName.text = intent.getStringExtra(dest_name).toString()
         this.menuitemPage.destDescription.text = intent.getStringExtra(dest_description).toString()
         val imageURL = intent.getStringExtra(dest_image).toString()
+        val condition = intent.getBooleanExtra(isBookmarked, false)
+        if(condition == true) {
+            this.menuitemPage.BookmarkIcon.setImageResource(R.drawable.details_bookmark_true)
+        } else {
+            this.menuitemPage.BookmarkIcon.setImageResource(R.drawable.details_bookmark_false)
+        }
+
+        var clicked = condition
+
+        println(condition)
         Picasso.get().load(imageURL).into(this.menuitemPage.destImage)
         this.menuitemPage.destCity.text = intent.getStringExtra(dest_city).toString()
         menuitemPage.LocationCard.setOnClickListener {
@@ -41,6 +56,83 @@ class MenuItemViewActivity : AppCompatActivity()  {
             intent.putExtra("dest_name", this.menuitemPage.destName.text)
             startActivity(intent)
         }
+
+        val db = Firebase.firestore
+        val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
+        val destinationsRef = db.collection(MyFirestoreReferences.DESTINATIONS_COLLECTION)
+        val bookmarks = MyFirestoreReferences.BOOKMARKS_FIELD
+        var userBookmarkNames = ArrayList<String>()
+        val usernameText = intent.getStringExtra(username)
+
+        menuitemPage.BookmarkCard.setOnClickListener {
+            if (clicked == false) {
+                clicked = true
+                this.menuitemPage.BookmarkIcon.setImageResource(R.drawable.details_bookmark_true)
+                usersRef
+                    .whereEqualTo(MyFirestoreReferences.USERNAME_FIELD, usernameText)
+                    .get()
+                    .addOnSuccessListener { documents ->
+                        for (document in documents) {
+                            document.reference.update(
+                                MyFirestoreReferences.BOOKMARKS_FIELD,
+                                FieldValue.arrayUnion(this.menuitemPage.destName.text)
+                            )
+                            destinationsRef
+                                .whereEqualTo(
+                                    MyFirestoreReferences.DESTNAME_FIELD,
+                                    this.menuitemPage.destName.text
+                                )
+                                .get()
+                                .addOnSuccessListener { documents ->
+                                    for (document in documents) {
+                                        document.reference.update(
+                                            MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
+                                            document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD)
+                                                .toString().toInt() + 1
+                                        )
+                                    }
+                                }
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        println("Error getting documents: $exception")
+                    }
+            } else {
+                clicked = false
+                this.menuitemPage.BookmarkIcon.setImageResource(R.drawable.details_bookmark_false)
+                usersRef
+                    .whereEqualTo(MyFirestoreReferences.USERNAME_FIELD, usernameText)
+                    .get()
+                    .addOnSuccessListener { documents ->
+                        for (document in documents) {
+                            document.reference.update(
+                                MyFirestoreReferences.BOOKMARKS_FIELD,
+                                FieldValue.arrayRemove(this.menuitemPage.destName.text)
+                            )
+                            destinationsRef
+                                .whereEqualTo(
+                                    MyFirestoreReferences.DESTNAME_FIELD,
+                                    this.menuitemPage.destName.text
+                                )
+                                .get()
+                                .addOnSuccessListener { documents ->
+                                    for (document in documents) {
+                                        document.reference.update(
+                                            MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
+                                            document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD)
+                                                .toString().toInt() - 1
+                                        )
+                                    }
+                                }
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        println("Error getting documents: $exception")
+                    }
+            }
+        }
+
+
         menuitemPage.ShareCard.setOnClickListener {
 
             // Share to Facebook
@@ -57,39 +149,11 @@ class MenuItemViewActivity : AppCompatActivity()  {
             */
             val content: ShareLinkContent = ShareLinkContent.Builder()
                 .setContentUrl(Uri.parse(imageURL))
-                .setQuote("Check out "+menuitemPage.destName.text.toString()+" in "+menuitemPage.destCity.text.toString()+"!")
+                .setQuote("Check out " + menuitemPage.destName.text.toString() + " in " + menuitemPage.destCity.text.toString() + "!")
                 .build()
             ShareDialog.show(this@MenuItemViewActivity, content)
-            /*
-            Picasso.get()
-                .load(imageURL)
-                .into(object : Target {
-                    override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                        bitmap?.let { loadedBitmap ->
-                            // Share to Facebook
-                            val photo: SharePhoto = SharePhoto.Builder()
-                                .setBitmap(bitmap)
-                                .build()
-                            val content: SharePhotoContent = SharePhotoContent.Builder()
-                                .addPhoto(photo)
-                                .build()
-                            ShareDialog.show(this@MenuItemViewActivity, content)
-                        }
-                    }
-
-                    override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-                        // Handle the case when loading the image fails
-                    }
-
-                    override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-                        // Handle any preparations before loading the image
-                    }
-                })
-             */
-
         }
     }
-
 
 
 }

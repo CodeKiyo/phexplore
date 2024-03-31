@@ -8,5 +8,6 @@
     <string name="slogan">Explore Philippines Explore Now</string>
     <string name="facebook_app_id">388208527317154</string>
     <string name="facebook_client_token">ec5bea084329bdfd23bca1ff5428b55d</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

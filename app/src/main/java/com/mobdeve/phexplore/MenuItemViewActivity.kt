@@ -35,7 +35,11 @@ class MenuItemViewActivity : AppCompatActivity()  {
         val imageURL = intent.getStringExtra(dest_image).toString()
         Picasso.get().load(imageURL).into(this.menuitemPage.destImage)
         this.menuitemPage.destCity.text = intent.getStringExtra(dest_city).toString()
-
+        menuitemPage.LocationCard.setOnClickListener {
+            val intent = intent
+            intent.setClass(this, MapsActivity::class.java)
+            startActivity(intent)
+        }
         menuitemPage.ShareCard.setOnClickListener {
 
             // Share to Facebook

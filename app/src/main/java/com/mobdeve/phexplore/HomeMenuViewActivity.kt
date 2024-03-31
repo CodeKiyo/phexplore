@@ -1,5 +1,6 @@
 package com.mobdeve.phexplore
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -37,6 +38,9 @@ class HomeMenuViewActivity : AppCompatActivity()  {
                 R.id.bottom_settings -> {
                     // start activity
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    val intentToLoginPage = Intent(this, LoginActivity::class.java)
+                    startActivity(intentToLoginPage)
+                    finish()
                     // finish
                     true
                 }

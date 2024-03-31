@@ -60,7 +60,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val longitude = document.get(MyFirestoreReferences.LONGITUDE_FIELD).toString().toDouble()
                     val location = LatLng(latitude, longitude)
                     mMap.addMarker(MarkerOptions().position(location).title("Marker in location"))
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 13F))
                 }
             }.addOnFailureListener { exception ->
                 // Handle any errors

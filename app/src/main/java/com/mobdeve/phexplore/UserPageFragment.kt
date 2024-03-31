@@ -57,6 +57,8 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment_new)  {
             val destImage = MyFirestoreReferences.DESTIMAGE_FIELD
             val destCategory = MyFirestoreReferences.DESTCATEGORY_FIELD
             val bookmarks = MyFirestoreReferences.BOOKMARKS_FIELD
+            val latitude = MyFirestoreReferences.BOOKMARKS_FIELD
+            val longitude = MyFirestoreReferences.BOOKMARKS_FIELD
 
             var userBookmarkNames = ArrayList<String>()
             var userBookmarks = ArrayList<DestinationModel>()
@@ -86,7 +88,9 @@ class UserPageFragment : Fragment(R.layout.user_page_fragment_new)  {
                                                 document.get(destImage).toString(),
                                                 newCutText[0],
                                                 document.get(destCategory).toString(),
-                                                0)
+                                                0,
+                                                "",
+                                                "")
                                             userBookmarks.add(newData)
                                         }
                                         favoriteRecyclerView.adapter = DestinationAdapter(userBookmarks, 2, username.toString())

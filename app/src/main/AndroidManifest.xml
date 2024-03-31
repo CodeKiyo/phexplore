@@ -70,7 +70,7 @@
             android:value="@string/facebook_client_token" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${GOOGLE_MAPS_API_KEY}" />
+            android:value="AIzaSyC08sTPaIIGJKUD3qsZS7rpLzQGQCjOEE0" />
         <provider
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider438098732088638"

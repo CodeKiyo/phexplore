@@ -38,6 +38,7 @@ class MenuItemViewActivity : AppCompatActivity()  {
         menuitemPage.LocationCard.setOnClickListener {
             val intent = intent
             intent.setClass(this, MapsActivity::class.java)
+            intent.putExtra("dest_name", this.menuitemPage.destName.text)
             startActivity(intent)
         }
         menuitemPage.ShareCard.setOnClickListener {

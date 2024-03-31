@@ -75,7 +75,9 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
                     document.get(destImage).toString(),
                     document.get(destCity).toString(),
                     document.get(destCategory).toString(),
-                    document.get(bookmarkAmount).toString().toInt())
+                    document.get(bookmarkAmount).toString().toInt(),
+                    "",
+                    "")
                 data.add(newData)
             }
             verticalRecyclerView.adapter = DestinationAdapter(data, 1, username.toString())
@@ -95,7 +97,9 @@ class HomeMenuPageFragment : Fragment(R.layout.homemenu_fragment) {
                         document.get(destImage).toString(),
                         document.get(destCity).toString(),
                         document.get(destCategory).toString(),
-                        document.get(bookmarkAmount).toString().toInt())
+                        document.get(bookmarkAmount).toString().toInt(),
+                        "",
+                        "")
                     recommendedData.add(newData)
                 }
             }

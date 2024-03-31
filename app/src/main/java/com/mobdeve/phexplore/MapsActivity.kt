@@ -1,7 +1,9 @@
 package com.mobdeve.phexplore
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -9,9 +11,14 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.mobdeve.phexplore.databinding.ActivityMapsBinding
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+    companion object {
+        const val dest_name = "dest_name"
+    }
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -39,10 +46,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        val db = Firebase.firestore
+        val destinationsRef = db.collection(MyFirestoreReferences.DESTINATIONS_COLLECTION)
+        val destName = intent.getStringExtra(dest_name)
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        destinationsRef.whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, destName)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    // Retrieve the document ID
+                    // Add a marker in Sydney and move the camera
+                    val latitude = document.get(MyFirestoreReferences.LATITUDE_FIELD).toString().toDouble()
+                    val longitude = document.get(MyFirestoreReferences.LONGITUDE_FIELD).toString().toDouble()
+                    val location = LatLng(latitude, longitude)
+                    mMap.addMarker(MarkerOptions().position(location).title("Marker in location"))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
+                }
+            }.addOnFailureListener { exception ->
+                // Handle any errors
+                println("Error getting documents: $exception")
+            }
+
+
     }
 }

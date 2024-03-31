@@ -1,6 +1,7 @@
 package com.mobdeve.phexplore
 
-class DestinationModel(destName: String, destDescription: String, destImage: String, destCity: String, destCategory: String, numOfBookmarks: Int) {
+class DestinationModel(destName: String, destDescription: String, destImage: String, destCity: String, destCategory: String,
+                       numOfBookmarks: Int, latitude: String, longitude: String) {
     var destName = destName
         private set
     var destImage = destImage
@@ -14,6 +15,10 @@ class DestinationModel(destName: String, destDescription: String, destImage: Str
         private set
     var numOfBookmarks = numOfBookmarks
         private set
+    var latitude = latitude
+        private set
+    var longitude = longitude
+        private set
     override fun toString(): String {
         return "DestinationModel{" +
                 "destName='" + destName + '\'' +
@@ -22,6 +27,8 @@ class DestinationModel(destName: String, destDescription: String, destImage: Str
                 ", destCity=" + destCity +
                 ", destCategory=" + destCategory +
                 ", numOfBookmarks= " + numOfBookmarks +
+                ", latitude= " + latitude +
+                ", longitude= " + longitude +
                 '}'
     }
 }

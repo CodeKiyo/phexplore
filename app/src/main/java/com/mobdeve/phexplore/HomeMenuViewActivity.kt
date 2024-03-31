@@ -1,5 +1,6 @@
 package com.mobdeve.phexplore
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.mobdeve.phexplore.databinding.HomemenuPageBinding
 class HomeMenuViewActivity : AppCompatActivity()  {
     private lateinit var mainmenuPage: HomemenuPageBinding
-
+    private val SPFILE = "SharedPref"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainmenuPage = HomemenuPageBinding.inflate(layoutInflater)
@@ -44,6 +45,7 @@ class HomeMenuViewActivity : AppCompatActivity()  {
                         builder.setMessage("Are you sure you want to log out?")
                         builder.setCancelable(true)
                         builder.setPositiveButton("Yes") { dialog, id ->
+                            saveToSharedPref("NONE")
                             val intentToLoginPage = Intent(this, LoginActivity::class.java)
                             startActivity(intentToLoginPage)
                             finish()
@@ -53,6 +55,7 @@ class HomeMenuViewActivity : AppCompatActivity()  {
                         val alert = builder.create()
                         alert.show()
                     } else {
+                        saveToSharedPref("NONE")
                         val intentToLoginPage = Intent(this, LoginActivity::class.java)
                         startActivity(intentToLoginPage)
                         finish()
@@ -63,6 +66,15 @@ class HomeMenuViewActivity : AppCompatActivity()  {
                 else -> false
             }
         }
+    }
+    private fun saveToSharedPref(username: String) {
+        val sp = getSharedPreferences(SPFILE, Context.MODE_PRIVATE)
+        val spEditor = sp.edit()
+
+        spEditor.putString(LoginActivity.signup_username_input,username)
+        spEditor.putString(IntentKeys.USERNAME.name, username)
+        spEditor.apply()
+        spEditor.commit()
     }
 
     private fun replaceFragment(fragment: Fragment) {

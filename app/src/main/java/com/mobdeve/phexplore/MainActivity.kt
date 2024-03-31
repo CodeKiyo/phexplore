@@ -1,5 +1,6 @@
 package com.mobdeve.phexplore
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -30,9 +31,11 @@ class MainActivity : AppCompatActivity() {
     )
 
     private lateinit var introPage : IntroPageBinding
+    private val SPFILE = "SharedPref"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        //check if logged in
+        loadFromSharedPref()
         // ViewBinding
         introPage = IntroPageBinding.inflate(layoutInflater)
 
@@ -67,6 +70,17 @@ class MainActivity : AppCompatActivity() {
             intentToLogin.putExtra(LoginActivity.BACKGROUND_RESOURCE_ID, backgroundImages[randomIndexBG])
 
             startActivity(intentToLogin)
+            finish()
+        }
+    }
+    private fun loadFromSharedPref() {
+        val sp = this.getSharedPreferences(SPFILE, Context.MODE_PRIVATE)
+        val userName = sp.getString(LoginActivity.signup_username_input, "NONE")
+        val userInput = sp.getString(IntentKeys.USERNAME.name, "NONE")
+        if (!(userName == "NONE" || userInput == "NONE")){
+            val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
+            intentToMainMenu.putExtra(IntentKeys.USERNAME.name, userName)
+            startActivity(intentToMainMenu)
             finish()
         }
     }

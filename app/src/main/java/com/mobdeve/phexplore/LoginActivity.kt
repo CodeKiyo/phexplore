@@ -1,5 +1,6 @@
 package com.mobdeve.phexplore
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Spannable
@@ -27,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
     // Should be used as conditions in logging in and moving to the MainMenuView only if are set to true
     private var usernameState = false
     private var passwordState = false
-
+    private val SPFILE = "SharedPref"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -160,6 +161,7 @@ class LoginActivity : AppCompatActivity() {
                 for (document in documents) {
                     // Retrieve the document ID
                     val documentId = document.id
+                    saveToSharedPref(username)
                     val intentToMainMenu = Intent(this, HomeMenuViewActivity::class.java)
                     intentToMainMenu.putExtra(IntentKeys.USERNAME.name, username)
                     intentToMainMenu.putExtra(signup_username_input, username)
@@ -174,4 +176,14 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+    private fun saveToSharedPref(username: String) {
+        val sp = getSharedPreferences(SPFILE, Context.MODE_PRIVATE)
+        val spEditor = sp.edit()
+
+        spEditor.putString(signup_username_input,username)
+        spEditor.putString(IntentKeys.USERNAME.name, username)
+        spEditor.apply()
+        spEditor.commit()
+    }
+
 }

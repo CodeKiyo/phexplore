@@ -36,7 +36,7 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
         val usersRef = db.collection(MyFirestoreReferences.USERS_COLLECTION)
         val destinationsRef = db.collection(MyFirestoreReferences.DESTINATIONS_COLLECTION)
         val bookmarks = MyFirestoreReferences.BOOKMARKS_FIELD
-        var userBookmarkNames = ArrayList<String>()
+        val userBookmarkNames = ArrayList<String>()
         var clicked = false
 
         usersRef
@@ -64,26 +64,26 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
 
         this.bookmarkButton?.setOnClickListener{
             if(isValidUser(username)) {
-                if(clicked == false) {
+                if(!clicked) {
                     clicked = true
                     this.bookmarkIcon?.setImageResource(R.drawable.homemenu_bookmark_true)
                     usersRef
                         .whereEqualTo(MyFirestoreReferences.USERNAME_FIELD, username)
                         .get()
-                        .addOnSuccessListener { documents ->
-                            for (document in documents) {
-                                document.reference.update(
+                        .addOnSuccessListener { bookmarksDocs ->
+                            for (userBookmarks in bookmarksDocs) {
+                                userBookmarks.reference.update(
                                     MyFirestoreReferences.BOOKMARKS_FIELD,
                                     FieldValue.arrayUnion(this.name.text)
                                 )
                                 destinationsRef
                                     .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
                                     .get()
-                                    .addOnSuccessListener { documents ->
-                                        for (document in documents) {
-                                            document.reference.update(
+                                    .addOnSuccessListener { bookmarkAmountDocs ->
+                                        for (bookmarkAmount in bookmarkAmountDocs) {
+                                            bookmarkAmount.reference.update(
                                                 MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
-                                                document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() + 1
+                                                bookmarkAmount.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() + 1
                                             )
                                         }
                                     }
@@ -98,20 +98,20 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
                     usersRef
                         .whereEqualTo(MyFirestoreReferences.USERNAME_FIELD, username)
                         .get()
-                        .addOnSuccessListener { documents ->
-                            for (document in documents) {
-                                document.reference.update(
+                        .addOnSuccessListener { bookmarksDocs ->
+                            for (userBookmarks in bookmarksDocs) {
+                                userBookmarks.reference.update(
                                     MyFirestoreReferences.BOOKMARKS_FIELD,
                                     FieldValue.arrayRemove(this.name.text)
                                 )
                                 destinationsRef
                                     .whereEqualTo(MyFirestoreReferences.DESTNAME_FIELD, this.name.text)
                                     .get()
-                                    .addOnSuccessListener { documents ->
-                                        for (document in documents) {
-                                            document.reference.update(
+                                    .addOnSuccessListener { bookmarkAmountDocs ->
+                                        for (bookmarkAmount in bookmarkAmountDocs) {
+                                            bookmarkAmount.reference.update(
                                                 MyFirestoreReferences.BOOKMARKAMOUNT_FIELD,
-                                                document.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() - 1
+                                                bookmarkAmount.get(MyFirestoreReferences.BOOKMARKAMOUNT_FIELD).toString().toInt() - 1
                                             )
                                         }
                                     }
@@ -131,6 +131,7 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
         }
 
         this.itemView.setOnClickListener {
+            println("clicked!")
             val intentToViewItem = Intent(itemView.context, MenuItemViewActivity::class.java)
             intentToViewItem.putExtra("DEST_NAME", model.destName)
             intentToViewItem.putExtra("DEST_IMAGE", model.destImage)
@@ -147,9 +148,6 @@ class DestinationViewHolder(itemView:View, private val username: String): Recycl
     }
 
     private fun isValidUser(username: String): Boolean {
-        if(username != "Guest")
-            return true
-        else
-            return false
+        return username != "Guest"
     }
 }
